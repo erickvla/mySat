@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>mysat login</title>
+</h:head>
+
+<h:body class="container">
+
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="styles.css" />
+	
+	<ui:debug hotkey="z" 
+			  rendered="#{initParam['javax.faces.PROJECT_STAGE'] ne 'Production'}" />
+
+	<h1>
+		<h:outputText value="hello"></h:outputText>
+	</h1>
+
+	<h:form id="mysatForm">
+
+		<p:commandButton value="PERSONA FISICA" 
+						 action="#{personaFisicaMBean.loadDashboard}" />
+
+	</h:form>
+
+</h:body>
+
+</html>

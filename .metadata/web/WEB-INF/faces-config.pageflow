@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14584185983800" configfile="/mysat/web/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="284" y="244" id="pf14584396986000" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14584396986001" path="/faces/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="persona-fisica.xhtml" x="612" y="244" id="pf14584396986002" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14584396986001" path="/faces/persona-fisica.xhtml"/>
+  <links id="pf14584396986001" target="pf14584396986002" source="pf14584396986000" outcome="success" redirect="true" fromaction="#{personaFisicaMBean.loadDashboard}"/>
+</pageflow:Pageflow>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="ElRancho" default="compile" basedir=".">
+
+	<description>
+		mysat application build file
+	</description>
+
+	<!-- set global properties for this build -->
+	<property file="build.properties" />
+
+	<path id="project.class.path">
+		<!-- pathelement location="${lib.path}" / -->
+		<fileset dir="${lib.path}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build.path}" />
+		<mkdir dir="${dist.path}" />
+	</target>
+
+	<target name="compile" depends="init" description="compile the source ">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${src.path}" destdir="${build.path}">
+			<classpath refid="project.class.path" />
+		</javac>
+		<copy todir="${build.path}">
+			<fileset dir="${src.path}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="dist" depends="compile,preparelib" description="generate the distribution">
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
+		<war destfile="${dist.path}/${app.name}.war">
+			<fileset dir="${web.path}" />
+			<classes dir="${build.path}" />
+		</war>
+		<delete dir="${web.lib.path}" />
+	</target>
+
+	<target name="deploy" depends="dist" description="deploys application into web server">
+		<copy todir="${webserver.deploy.path}">
+			<fileset dir="${dist.path}" includes="**/${app.name}.war" />
+		</copy>
+	</target>
+
+	<target name="preparelib" description="prepares application lib folder">
+		<delete dir="${web.lib.path}" />
+		<mkdir dir="${web.lib.path}" />
+		<copy todir="${web.lib.path}">
+			<fileset dir="${lib.path}">
+				<include name="**/*.jar" />
+			</fileset>
+			<fileset dir="${mojarra.lib}">
+				<include name="**/jsf-api.jar" />
+				<include name="**/jsf-impl.jar" />
+			</fileset>
+			<fileset dir="${hibernate.home}">
+				<include name="**/hibernate3.jar" />
+				<include name="**/hibernate-testing.jar" />
+			</fileset>
+			<fileset dir="${hibernate.lib.required}">
+				<include name="**/*.jar" />
+			</fileset>
+			<fileset dir="${spring.lib}">
+				<include name="**/org.springframework.asm-3.1.0.M2.jar" />
+				<include name="**/org.springframework.beans-3.1.0.M2.jar" />
+				<include name="**/org.springframework.context-3.1.0.M2.jar" />
+				<include name="**/org.springframework.core-3.1.0.M2.jar" />
+				<include name="**/org.springframework.jdbc-3.1.0.M2.jar" />
+				<include name="**/org.springframework.orm-3.1.0.M2.jar" />
+				<include name="**/org.springframework.transaction-3.1.0.M2.jar" />
+				<include name="**/org.springframework.web-3.1.0.M2.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build.path}" />
+		<delete dir="${dist.path}" />
+	</target>
+
+</project>

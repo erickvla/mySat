@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 10pt !important;
+}
+
+.fs.label {
+	width:20%;
+}
+
+.fs.input {
+	width:80%;
+}

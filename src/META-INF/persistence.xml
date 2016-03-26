@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<persistence-unit name="mysatPU" transaction-type="RESOURCE_LOCAL">
+
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		
+		<non-jta-data-source>java:comp/env/jdbc/MySatDB</non-jta-data-source>
+		<class>org.mysat.persistence.entities.Estudiante</class>
+		<class>org.mysat.persistence.entities.Factura</class>
+		<class>org.mysat.persistence.entities.Persona</class>
+		<class>org.mysat.persistence.entities.PersonaFisica</class>
+		<class>org.mysat.persistence.entities.PersonaMoral</class>
+		<class>org.mysat.persistence.entities.Beneficiario</class>
+		<class>org.mysat.persistence.entities.Deduccion</class>
+		<class>org.mysat.persistence.entities.NivelEducativo</class>
+
+		<properties>
+
+			<!-- <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/db_mysat;create=true;upgrade=true" />
+			<property name="javax.persistence.jdbc.user" value="mysat" />
+			<property name="javax.persistence.jdbc.password" value="passw0rd" />
+			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver" /> -->
+			<property name="eclipselink.target-database" value="Derby"/>
+			<property name="eclipselink.logging.level" value="ALL"/>
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

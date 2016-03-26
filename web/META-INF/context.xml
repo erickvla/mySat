@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+
+	<WatchedResources>WEB-INF/web.xml</WatchedResources>
+	
+	<Resource name="jdbc/MySatDB" 
+			  auth="Container" 
+			  type="javax.sql.DataSource" 
+			  description="Derby MySatDB DataSource" 
+			  maxActive="100" 
+			  maxIdle="30" 
+			  maxWait="10000" 
+			  username="mysat" 
+			  password="passw0rd" 
+			  driverClassName="org.apache.derby.jdbc.EmbeddedDriver" 
+			  url="jdbc:derby:Databases/Derby/MySatDB;create=true" />
+
+</Context>

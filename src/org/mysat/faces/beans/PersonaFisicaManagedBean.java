@@ -20,6 +20,7 @@ import org.mysat.faces.beans.results.PersonaFisicaResultsBean;
 import org.mysat.persistence.controllers.PersonaFisicaController;
 import org.mysat.persistence.entities.Persona;
 import org.mysat.persistence.entities.PersonaFisica;
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 
 /**
@@ -59,7 +60,6 @@ public class PersonaFisicaManagedBean implements Serializable {
 
 		loadAllItems();
 		
-		//getResults().setMessage(getInsertSuccessMessage());
 		addMessage(getInsertSuccessMessage(), FacesMessage.SEVERITY_INFO);
 	}
 
@@ -70,15 +70,31 @@ public class PersonaFisicaManagedBean implements Serializable {
 
 		loadAllItems();
 		
-		//getResults().setMessage(getDeleteSuccessMessage());
 		addMessage(getDeleteSuccessMessage(), FacesMessage.SEVERITY_INFO);
 	}
 
 	public void rowSelectListener(SelectEvent event) {
-		LOG.debug(event.getObject());
 		if (event != null) {
-			System.out.println(event.getObject());
+			LOG.debug(event.getObject());
 		}
+	}
+	
+	public void updateItemListener(RowEditEvent event) {
+		PersonaFisica newPF = (PersonaFisica)event.getObject();
+		
+		LOG.debug("Row Edit: " + event.getObject());
+		
+		getController().update(newPF);
+
+		loadAllItems();
+		
+		if (newPF != null) {
+            addMessage(getUpdateSuccessMessage(newPF), FacesMessage.SEVERITY_INFO);
+        }
+	}
+	
+	public void rowCancelListener(RowEditEvent event) {
+		LOG.debug("Cancel edit");
 	}
 	
 	private void addMessage(String message, FacesMessage.Severity severity) {
@@ -96,7 +112,7 @@ public class PersonaFisicaManagedBean implements Serializable {
 	private String getInsertSuccessMessage() {
 		StringBuffer sb = new StringBuffer();
 		
-		sb.append("Registro creado: \r");
+		sb.append("Registro creado: \n");
 		sb.append(getProperties().display());
 		
 		return sb.toString();
@@ -105,12 +121,22 @@ public class PersonaFisicaManagedBean implements Serializable {
 	private String getDeleteSuccessMessage() {
 		StringBuffer sb = new StringBuffer();
 		
-		sb.append("Registro(s) eliminado(s): \r");
+		sb.append("Registro(s) eliminado(s): \n");
 		
 		for (PersonaFisica pf : getSelectedItems()) {
 			sb.append(pf.display());
-			sb.append("\r");
+			sb.append("\n");
 		}
+		
+		return sb.toString();
+	}
+	
+	private String getUpdateSuccessMessage(PersonaFisica newPF) {
+		StringBuffer sb = new StringBuffer();
+		
+		sb.append("Registro actualizado: \n");
+		
+		sb.append(newPF.display());
 		
 		return sb.toString();
 	}

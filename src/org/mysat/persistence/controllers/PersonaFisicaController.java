@@ -21,6 +21,11 @@ public class PersonaFisicaController implements Serializable {
 		getPersonaFisicaDao().insert(personaFisica);
 	}
 	
+	public void update(PersonaFisica personaFisica) {
+		getPersonaDao().update(personaFisica.getPersona());
+		getPersonaFisicaDao().update(personaFisica);
+	}
+	
 	public void delete(List<PersonaFisica> personaFisicas) {
 		for (PersonaFisica item : personaFisicas) {
 			getPersonaFisicaDao().delete(item);

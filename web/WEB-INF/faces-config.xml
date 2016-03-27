@@ -9,6 +9,13 @@
 		<el-resolver>
     		    org.springframework.web.jsf.el.SpringBeanFacesELResolver
 		</el-resolver>
+		<locale-config>
+			<default-locale>en_US</default-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>Messages</base-name>
+			<var>msg</var>
+	   	</resource-bundle>
   	</application>
 	
 	<navigation-rule>

@@ -10,7 +10,9 @@
 
 <h:head>
 
-	<title>[mysat]</title>
+	<title>
+		<h:outputText value="#{msg['app.name']}" />
+	</title>
 	
 </h:head>
 
@@ -28,7 +30,9 @@
 	
 		<p></p>
 		
-		<h1>[MySat]</h1>
+		<h1>
+			<h:outputText value="#{msg['app.name']}" />
+		</h1>
 		
 		<p></p>
 
@@ -38,17 +42,17 @@
 					
 		<p></p>
 					
-		<p:commandButton id="crearButton" 
-						 value="CREAR" 
+		<p:commandButton id="crearButton"  
 						 type="button" 
-						 onclick="PF('wCreateItemDialog').show();" />
+						 onclick="PF('wCreateItemDialog').show();" 
+						 value="#{msg['button.crear']}" />
 
 		<p:commandButton id="eliminarButton" 
-						 value="ELIMINAR" 
 						 type="button" 
 						 widgetVar="wEliminarButton"
-						 onclick="PF('wEliminarConfirmDialog').show();" />
-						 
+						 onclick="PF('wEliminarConfirmDialog').show();" 
+						 value="#{msg['button.eliminar']}" />
+		
 		<p></p>
 
 		<p:dataTable id="itemsDataTable" 
@@ -57,7 +61,6 @@
 					 rowExpandMode="single" 
 					 rowKey="#{pf.id}" 
 					 selection="#{personaFisicaMBean.selectedItems}" 
-					 rowSelectMode="checkbox" 
 					 editable="true">
 
 			<p:ajax event="rowEdit"
@@ -66,10 +69,15 @@
 
 			<p:ajax event="rowEditCancel"
 					listener="#{personaFisicaMBean.rowCancelListener}" />
+					
+			<p:ajax event="rowSelect"
+					listener="#{personaFisicaMBean.rowSelectListener}" />
 
 			<f:facet name="header">
 			
-				<h4>[Persona Fisica]</h4>
+				<h4>
+					<h:outputText value="#{msg['title.persona.fisica']}" />
+				</h4>
 
 			</f:facet>
 
@@ -82,7 +90,7 @@
 			<p:column selectionMode="multiple" 
 					  width="40" />
 
-			<p:column headerText="NOMBRE" 
+			<p:column headerText="#{msg['column.nombre']}" 
 					  sortBy="#{pf.persona.nombre}" 
 					  filterBy="#{pf.persona.nombre}" 
 					  filterMatchMode="contains">
@@ -103,7 +111,7 @@
 
 			</p:column>
 
-			<p:column headerText="APELLIDO" 
+			<p:column headerText="#{msg['column.apellido']}" 
 					  sortBy="#{pf.persona.apellido}" 
 					  filterBy="#{pf.persona.apellido}" 
 					  filterMatchMode="contains">
@@ -124,7 +132,7 @@
 
 			</p:column>
 
-			<p:column headerText="RFC" 
+			<p:column headerText="#{msg['column.rfc']}" 
 					  sortBy="#{pf.rfc}" 
 					  filterBy="#{pf.rfc}" 
 					  filterMatchMode="contains">
@@ -164,35 +172,28 @@
 							 
 					<f:facet name="header">
 						
-						<h4>[Estudiantes]</h4>
+						<h4>
+							<h:outputText value="#{msg['title.estudiante']}" />
+						</h4>
 						
 					</f:facet>
 
-					<p:column sortBy="#{est.persona.nombre}">
-
-						<f:facet name="header">
-							<h:outputText value="NOMBRE" />
-						</f:facet>
+					<p:column headerText="#{msg['column.nombre']}"
+							  sortBy="#{est.persona.nombre}">
 
 						<h:outputText value="#{est.persona.nombre}" />
 
 					</p:column>
 
-					<p:column sortBy="#{est.persona.apellido}">
-
-						<f:facet name="header">
-							<h:outputText value="APELLIDO" />
-						</f:facet>
+					<p:column headerText="#{msg['column.apellido']}"
+							  sortBy="#{est.persona.apellido}">
 
 						<h:outputText value="#{est.persona.apellido}" />
 
 					</p:column>
 
-					<p:column sortBy="#{est.curp}">
-
-						<f:facet name="header">
-							<h:outputText value="CURP" />
-						</f:facet>
+					<p:column  headerText="#{msg['column.curp']}"
+							  sortBy="#{est.curp}">
 
 						<h:outputText value="#{est.curp}" />
 
@@ -213,7 +214,7 @@
 				  resizable="false" 
 				  widgetVar="wCreateItemDialog" 
 				  width="550" 
-				  header="CREAR REGISTRO">
+				  header="#{msg['header.crear.registro']}">
 
 			<p:panelGrid id="createItemPanelGrid" 
 						 columns="2" 
@@ -259,7 +260,7 @@
 			<p></p>
 
 			<p:commandButton id="guardarCommandButton" 
-							 value="GUARDAR" 
+							 value="#{msg['button.guardar']}" 
 							 ajax="true" 
 							 event="click" 
 							 actionListener="#{personaFisicaMBean.insertItemListener}" 
@@ -268,7 +269,7 @@
 			</p:commandButton>
 
 			<p:commandButton id="cancelarCommandButton" 
-							 value="CANCELAR" 
+							 value="#{msg['button.cancelar']}" 
 							 onclick="PF('wCreateItemDialog').hide()" 
 							 type="button">
 			</p:commandButton>
@@ -278,13 +279,13 @@
 		<p:confirmDialog id="eliminarConfirmDialog" 
 						 closable="true" 
 						 closeOnEscape="true" 
-						 header="Eliminar Registros" 
+						 header="#{msg['header.eliminar.registro']}" 
 						 widgetVar="wEliminarConfirmDialog" 
 						 message="¿Desea eliminar los registros seleccionados?" 
 						 severity="alert">
 
 			<p:commandButton id="eliminarCommandButton" 
-							 value="SI">
+							 value="#{msg['button.si']}">
 							 
 				<p:ajax event="click" 
 						listener="#{personaFisicaMBean.deleteItemsListener}" 
@@ -293,7 +294,7 @@
 					
 			</p:commandButton>
 
-			<p:commandButton value="NO" 
+			<p:commandButton value="#{msg['button.no']}" 
 							 onclick="PF('wEliminarConfirmDialog').hide();" 
 							 type="button" />
 

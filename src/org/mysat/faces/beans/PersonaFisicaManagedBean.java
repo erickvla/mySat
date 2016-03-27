@@ -4,6 +4,7 @@
 package org.mysat.faces.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -49,6 +50,7 @@ public class PersonaFisicaManagedBean implements Serializable {
 	public PersonaFisicaManagedBean() {
 		properties = new PersonaFisica();
 		properties.setPersona(new Persona());
+		selectedItems = new ArrayList<PersonaFisica>(0);
 	}
 
 	public String loadDashboard() {

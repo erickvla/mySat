@@ -46,8 +46,8 @@
 		<p:commandButton id="eliminarButton" 
 						 value="ELIMINAR" 
 						 type="button" 
-						 onclick="PF('wEliminarConfirmDialog').show();" 
-						 disabled="PF('itemsDataTable').getSelectedRowsCount() == 0" />
+						 widgetVar="wEliminarButton"
+						 onclick="PF('wEliminarConfirmDialog').show();" />
 						 
 		<p></p>
 
@@ -93,7 +93,11 @@
 					</f:facet>
 					<f:facet name="input">
 						<p:inputText id="editNombreInpTxt" 
-									 value="#{pf.persona.nombre}" />
+									 value="#{pf.persona.nombre}" 
+									 label="Nombre" 
+							 		 maxlength="30" 
+							 		 required="true" 
+							 		 size="30" />
 					</f:facet>
 				</p:cellEditor>
 
@@ -110,7 +114,11 @@
 					</f:facet>
 					<f:facet name="input">
 						<p:inputText id="editApellidoInpTxt"
-									 value="#{pf.persona.apellido}" />
+									 value="#{pf.persona.apellido}" 
+									 label="Apellido" 
+							 		 maxlength="30" 
+							 		 required="true" 
+							 		 size="30" />
 					</f:facet>
 				</p:cellEditor>
 
@@ -127,7 +135,12 @@
 					</f:facet>
 					<f:facet name="input">
 						<p:inputText id="editRfcInpTxt" 
-									 value="#{pf.rfc}" />
+									 value="#{pf.rfc}" 
+									 label="RFC" 
+							 		 maxlength="15" 
+							 		 required="true" 
+							 		 size="15" 
+							 		 valueChangeListener="#{personaFisicaMBean.onRfcValueChangeListener}" />
 					</f:facet>
 				</p:cellEditor>
 
@@ -238,7 +251,8 @@
 							 maxlength="15" 
 							 required="true" 
 							 size="15" 
-							 value="#{personaFisicaMBean.properties.rfc}" />
+							 value="#{personaFisicaMBean.properties.rfc}" 
+							 valueChangeListener="#{personaFisicaMBean.onRfcValueChangeListener}" />
 
 			</p:panelGrid>
 

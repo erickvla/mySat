@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.RollbackException;
+
 import org.mysat.Constants;
 import org.mysat.persistence.entities.PersonaFisica;
 
@@ -132,11 +134,11 @@ public class PersonaFisicaDao extends AbstractDao<PersonaFisica, Long> implement
 		return item;
 	}
 
-	public void insert(PersonaFisica item) {
+	public void insert(PersonaFisica item) throws RollbackException, IllegalArgumentException {
 		super.insert(item);
 	}
 	
-	public void update(PersonaFisica item) {
+	public void update(PersonaFisica item) throws RollbackException, IllegalArgumentException {
 		super.update(item);
 	}
 

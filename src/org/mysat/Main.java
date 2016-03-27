@@ -5,6 +5,7 @@ package org.mysat;
 
 import java.util.List;
 
+import org.apache.derby.shared.common.error.DerbySQLIntegrityConstraintViolationException;
 import org.mysat.persistence.daos.EstudianteDao;
 import org.mysat.persistence.daos.PersonaDao;
 import org.mysat.persistence.daos.PersonaFisicaDao;
@@ -52,7 +53,7 @@ public class Main {
 		}
 	}
 
-	private static void insertPersonaFisica() {
+	private static void insertPersonaFisica() throws DerbySQLIntegrityConstraintViolationException, IllegalArgumentException {
 		PersonaFisicaDao pfController = new PersonaFisicaDao();
 		PersonaDao pController = new PersonaDao();
 		PersonaFisica pfItem = new PersonaFisica();

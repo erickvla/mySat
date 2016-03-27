@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.RollbackException;
+
 import org.mysat.Constants;
 import org.mysat.persistence.entities.Persona;
 
@@ -102,11 +104,11 @@ public class PersonaDao extends AbstractDao<Persona, Long> implements Serializab
 		return item;
 	}
 	
-	public void insert(Persona item) {
+	public void insert(Persona item) throws RollbackException, IllegalArgumentException {
 		super.insert(item);
 	}
 	
-	public void update(Persona item) {
+	public void update(Persona item) throws RollbackException, IllegalArgumentException {
 		super.update(item);
 	}
 	

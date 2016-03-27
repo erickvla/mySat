@@ -13,6 +13,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.event.ValueChangeEvent;
+import javax.persistence.RollbackException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,6 +22,7 @@ import org.mysat.faces.beans.results.PersonaFisicaResultsBean;
 import org.mysat.persistence.controllers.PersonaFisicaController;
 import org.mysat.persistence.entities.Persona;
 import org.mysat.persistence.entities.PersonaFisica;
+import org.primefaces.component.inputtext.InputText;
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 
@@ -56,11 +59,17 @@ public class PersonaFisicaManagedBean implements Serializable {
 
 	public void insertItemListener(ActionEvent event) {
 
-		getController().insert(getProperties());
+		try {
+			getController().insert(getProperties());
 
-		loadAllItems();
+			loadAllItems();
 		
-		addMessage(getInsertSuccessMessage(), FacesMessage.SEVERITY_INFO);
+			addMessage(getInsertSuccessMessage(), FacesMessage.SEVERITY_INFO);
+		} catch(IllegalArgumentException iaException) {
+			addMessage("El registro no pudo ser guardado, tal vez exista un registro con los mismos datos.", FacesMessage.SEVERITY_ERROR);
+		} catch (RollbackException rException) {
+			addMessage("El registro no pudo ser guardado, tal vez exista un registro con los mismos datos.", FacesMessage.SEVERITY_ERROR);
+		}
 	}
 
 	public void deleteItemsListener(AjaxBehaviorEvent event) {
@@ -80,21 +89,34 @@ public class PersonaFisicaManagedBean implements Serializable {
 	}
 	
 	public void updateItemListener(RowEditEvent event) {
-		PersonaFisica newPF = (PersonaFisica)event.getObject();
 		
-		LOG.debug("Row Edit: " + event.getObject());
-		
-		getController().update(newPF);
-
-		loadAllItems();
-		
-		if (newPF != null) {
-            addMessage(getUpdateSuccessMessage(newPF), FacesMessage.SEVERITY_INFO);
-        }
+		try {
+			PersonaFisica newPF = (PersonaFisica)event.getObject();
+			
+			LOG.debug("Row Edit: " + event.getObject());
+			
+			getController().update(newPF);
+	
+			loadAllItems();
+			
+			if (newPF != null) {
+	            addMessage(getUpdateSuccessMessage(newPF), FacesMessage.SEVERITY_INFO);
+	        }
+		} catch(IllegalArgumentException iaException) {
+			addMessage("El registro no pudo ser guardado, tal vez exista un registro con los mismos datos.", FacesMessage.SEVERITY_ERROR);
+		} catch (RollbackException rException) {
+			addMessage("El registro no pudo ser guardado, tal vez exista un registro con los mismos datos.", FacesMessage.SEVERITY_ERROR);
+		}
 	}
 	
 	public void rowCancelListener(RowEditEvent event) {
 		LOG.debug("Cancel edit");
+	}
+
+	public void onRfcValueChangeListener(ValueChangeEvent event) {
+		InputText inputText = (InputText)event.getSource();
+		
+		inputText.setValue(event.getNewValue().toString().toUpperCase());
 	}
 	
 	private void addMessage(String message, FacesMessage.Severity severity) {

@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.RollbackException;
+
 import org.mysat.Constants;
 import org.mysat.persistence.entities.Estudiante;
 
@@ -132,7 +134,7 @@ public class EstudianteDao extends AbstractDao<Estudiante, Long> implements Seri
 		return item;
 	}
 	
-	public void insert(Estudiante item) {
+	public void insert(Estudiante item) throws RollbackException, IllegalArgumentException {
 		super.insert(item);
 	}
 

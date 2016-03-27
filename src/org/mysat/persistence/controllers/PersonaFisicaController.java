@@ -3,6 +3,8 @@ package org.mysat.persistence.controllers;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.RollbackException;
+
 import org.mysat.persistence.daos.PersonaDao;
 import org.mysat.persistence.daos.PersonaFisicaDao;
 import org.mysat.persistence.entities.PersonaFisica;
@@ -16,12 +18,12 @@ public class PersonaFisicaController implements Serializable {
 	private PersonaDao personaDao;
 	private PersonaFisicaDao personaFisicaDao;
 	
-	public void insert(PersonaFisica personaFisica) {
+	public void insert(PersonaFisica personaFisica) throws RollbackException, IllegalArgumentException {
 		getPersonaDao().insert(personaFisica.getPersona());
 		getPersonaFisicaDao().insert(personaFisica);
 	}
 	
-	public void update(PersonaFisica personaFisica) {
+	public void update(PersonaFisica personaFisica) throws RollbackException, IllegalArgumentException {
 		getPersonaDao().update(personaFisica.getPersona());
 		getPersonaFisicaDao().update(personaFisica);
 	}

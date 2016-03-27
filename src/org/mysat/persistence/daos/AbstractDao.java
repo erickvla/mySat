@@ -9,8 +9,10 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.RollbackException;
 
 import org.mysat.Constants;
 
@@ -23,7 +25,7 @@ public abstract class AbstractDao<E, PK> {
 	Class<E> managedClass;
 	
 	@SuppressWarnings("unchecked")
-	protected List<E> getListFromNamedQuery(String namedQuery) {
+	protected List<E> getListFromNamedQuery(String namedQuery) throws NoResultException {
 		List<E> itemsList = null;
 		EntityManager mgr = null;
 		Query query = null;
@@ -45,7 +47,7 @@ public abstract class AbstractDao<E, PK> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected List<E> getListFromNamedQueryParams(String namedQuery, Map<String, ?> params) {
+	protected List<E> getListFromNamedQueryParams(String namedQuery, Map<String, ?> params) throws NoResultException {
 		List<E> itemsList = null;
 		EntityManager mgr = null;
 		Query query = null;
@@ -70,7 +72,7 @@ public abstract class AbstractDao<E, PK> {
 		return itemsList;
 	}
 	
-	protected E findById(PK id) {
+	protected E findById(PK id) throws NonUniqueResultException, IllegalArgumentException {
 		E entity = null;
 		EntityManager mgr = null;
 		
@@ -89,7 +91,7 @@ public abstract class AbstractDao<E, PK> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	protected E getItemFromNamedQueryParams(String namedQuery, Map<String, ?> params) {
+	protected E getItemFromNamedQueryParams(String namedQuery, Map<String, ?> params) throws NonUniqueResultException {
 		E entity = null;
 		EntityManager mgr = null;
 		Query query = null;
@@ -114,7 +116,7 @@ public abstract class AbstractDao<E, PK> {
 		return entity;
 	}
 	
-	protected void insert(E entity) {
+	protected void insert(E entity) throws RollbackException, IllegalArgumentException {
 		EntityManager mgr = null;
 		
 		try {
@@ -132,7 +134,7 @@ public abstract class AbstractDao<E, PK> {
 		}
 	}
 	
-	protected void update(E entity) {
+	protected void update(E entity) throws RollbackException, IllegalArgumentException {
 		EntityManager mgr = null;
 		
 		try {
@@ -150,7 +152,7 @@ public abstract class AbstractDao<E, PK> {
 		}
 	}
 	
-	protected void delete(PK id) {
+	protected void delete(PK id) throws IllegalArgumentException {
 		EntityManager mgr = null;
 		E entity = null;
 		

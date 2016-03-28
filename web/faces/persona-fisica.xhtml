@@ -11,7 +11,7 @@
 <h:head>
 
 	<title>
-		<h:outputText value="#{msg['app.name']}" />
+		<h:outputText value="#{bundle['app.name']}" />
 	</title>
 	
 </h:head>
@@ -31,7 +31,7 @@
 		<p></p>
 		
 		<h1>
-			<h:outputText value="#{msg['app.name']}" />
+			<h:outputText value="#{bundle['app.name']}" />
 		</h1>
 		
 		<p></p>
@@ -39,19 +39,6 @@
 		<p:messages id="messages" 
 					showSummary="true" 
 					showDetail="false" />
-					
-		<p></p>
-					
-		<p:commandButton id="crearButton"  
-						 type="button" 
-						 onclick="PF('wCreateItemDialog').show();" 
-						 value="#{msg['button.crear']}" />
-
-		<p:commandButton id="eliminarButton" 
-						 type="button" 
-						 widgetVar="wEliminarButton"
-						 onclick="PF('wEliminarConfirmDialog').show();" 
-						 value="#{msg['button.eliminar']}" />
 		
 		<p></p>
 
@@ -76,8 +63,19 @@
 			<f:facet name="header">
 			
 				<h4>
-					<h:outputText value="#{msg['title.persona.fisica']}" />
+					<h:outputText value="#{bundle['title.persona.fisica']}" />
 				</h4>
+				
+				<p:commandButton id="crearButton"  
+								 type="button" 
+								 onclick="PF('wCreateItemDialog').show();" 
+								 value="#{bundle['button.crear']}" />
+		
+				<p:commandButton id="eliminarButton" 
+								 type="button" 
+								 widgetVar="wEliminarButton"
+								 onclick="PF('wEliminarConfirmDialog').show();" 
+								 value="#{bundle['button.eliminar']}" />
 
 			</f:facet>
 
@@ -90,7 +88,7 @@
 			<p:column selectionMode="multiple" 
 					  width="40" />
 
-			<p:column headerText="#{msg['column.nombre']}" 
+			<p:column headerText="#{bundle['column.nombre']}" 
 					  sortBy="#{pf.persona.nombre}" 
 					  filterBy="#{pf.persona.nombre}" 
 					  filterMatchMode="contains">
@@ -103,15 +101,20 @@
 						<p:inputText id="editNombreInpTxt" 
 									 value="#{pf.persona.nombre}" 
 									 label="Nombre" 
-							 		 maxlength="30" 
 							 		 required="true" 
-							 		 size="30" />
+							 		 size="30">
+							<f:validateLength for="editNombreInpTxt"
+											  minimum="3"
+											  maximum="30" />
+							<f:validator for="editNombreInpTxt" 
+								 		 validatorId="nombreApellidoValidator" />
+						</p:inputText>
 					</f:facet>
 				</p:cellEditor>
 
 			</p:column>
 
-			<p:column headerText="#{msg['column.apellido']}" 
+			<p:column headerText="#{bundle['column.apellido']}" 
 					  sortBy="#{pf.persona.apellido}" 
 					  filterBy="#{pf.persona.apellido}" 
 					  filterMatchMode="contains">
@@ -124,15 +127,20 @@
 						<p:inputText id="editApellidoInpTxt"
 									 value="#{pf.persona.apellido}" 
 									 label="Apellido" 
-							 		 maxlength="30" 
 							 		 required="true" 
-							 		 size="30" />
+							 		 size="30">
+							<f:validateLength for="editApellidoInpTxt"
+											  minimum="3"
+											  maximum="30" />
+							<f:validator for="editApellidoInpTxt" 
+								 		 validatorId="nombreApellidoValidator" />
+						</p:inputText>
 					</f:facet>
 				</p:cellEditor>
 
 			</p:column>
 
-			<p:column headerText="#{msg['column.rfc']}" 
+			<p:column headerText="#{bundle['column.rfc']}" 
 					  sortBy="#{pf.rfc}" 
 					  filterBy="#{pf.rfc}" 
 					  filterMatchMode="contains">
@@ -145,10 +153,15 @@
 						<p:inputText id="editRfcInpTxt" 
 									 value="#{pf.rfc}" 
 									 label="RFC" 
-							 		 maxlength="15" 
 							 		 required="true" 
 							 		 size="15" 
-							 		 valueChangeListener="#{personaFisicaMBean.onRfcValueChangeListener}" />
+							 		 valueChangeListener="#{personaFisicaMBean.onRfcValueChangeListener}">
+							<f:validateLength for="editRfcInpTxt"
+											  minimum="13"
+											  maximum="13" />
+							<f:validator for="editRfcInpTxt" 
+								 		 validatorId="rfcValidator" />
+						</p:inputText>
 					</f:facet>
 				</p:cellEditor>
 
@@ -173,26 +186,26 @@
 					<f:facet name="header">
 						
 						<h4>
-							<h:outputText value="#{msg['title.estudiante']}" />
+							<h:outputText value="#{bundle['title.estudiante']}" />
 						</h4>
 						
 					</f:facet>
 
-					<p:column headerText="#{msg['column.nombre']}"
+					<p:column headerText="#{bundle['column.nombre']}"
 							  sortBy="#{est.persona.nombre}">
 
 						<h:outputText value="#{est.persona.nombre}" />
 
 					</p:column>
 
-					<p:column headerText="#{msg['column.apellido']}"
+					<p:column headerText="#{bundle['column.apellido']}"
 							  sortBy="#{est.persona.apellido}">
 
 						<h:outputText value="#{est.persona.apellido}" />
 
 					</p:column>
 
-					<p:column  headerText="#{msg['column.curp']}"
+					<p:column  headerText="#{bundle['column.curp']}"
 							  sortBy="#{est.curp}">
 
 						<h:outputText value="#{est.curp}" />
@@ -214,53 +227,65 @@
 				  resizable="false" 
 				  widgetVar="wCreateItemDialog" 
 				  width="550" 
-				  header="#{msg['header.crear.registro']}">
+				  header="#{bundle['header.crear.registro']}">
 
 			<p:panelGrid id="createItemPanelGrid" 
 						 columns="2" 
 						 layout="grid" 
 						 columnClasses="fs.label, fs.input">
 
-				<p:outputLabel for="nombreInputText">
-					<h:outputText value="Nombre: " />
-				</p:outputLabel>
+				<p:outputLabel for="nombreInputText" 
+							   value="#{bundle['label.nombre']}" />
 
 				<p:inputText id="nombreInputText" 
-							 label="Nombre" 
-							 maxlength="30" 
+							 label="#{bundle['label.nombre']}" 
 							 required="true" 
 							 size="30" 
-							 value="#{personaFisicaMBean.properties.persona.nombre}" />
+							 value="#{personaFisicaMBean.properties.persona.nombre}">
+					<f:validateLength for="nombreInputText"
+									  minimum="3"
+									  maximum="30" />
+					<f:validator for="nombreInputText" 
+								 validatorId="nombreApellidoValidator" />
+				</p:inputText>
 
-				<p:outputLabel for="apellidoInputText">
-					<h:outputText value="Apellido: " />
-				</p:outputLabel>
+				<p:outputLabel for="apellidoInputText"
+							   value="#{bundle['label.apellido']}" />
 
 				<p:inputText id="apellidoInputText" 
-							 label="Apellido" 
-							 maxlength="30" 
+							 label="#{bundle['label.apellido']}" 
 							 required="true" 
 							 size="30" 
-							 value="#{personaFisicaMBean.properties.persona.apellido}" />
+							 value="#{personaFisicaMBean.properties.persona.apellido}">
+					<f:validateLength for="apellidoInputText"
+									  minimum="3"
+									  maximum="30" />
+					<f:validator for="apellidoInputText" 
+								 validatorId="nombreApellidoValidator" />
+				</p:inputText>
 
-				<p:outputLabel for="rfcInputText">
-					<h:outputText value="RFC: " />
-				</p:outputLabel>
+				<p:outputLabel for="rfcInputText"
+							   value="#{bundle['label.rfc']}" />
 
 				<p:inputText id="rfcInputText" 
-							 label="RFC" 
-							 maxlength="15" 
+							 label="#{bundle['label.rfc']}" 
 							 required="true" 
 							 size="15" 
 							 value="#{personaFisicaMBean.properties.rfc}" 
-							 valueChangeListener="#{personaFisicaMBean.onRfcValueChangeListener}" />
+							 valueChangeListener="#{personaFisicaMBean.onRfcValueChangeListener}">
+					<f:validateLength for="apellidoInputText"
+									  minimum="13"
+									  maximum="13" />
+					<f:validator for="rfcInputText" 
+								 validatorId="rfcValidator" />
+				</p:inputText>
 
 			</p:panelGrid>
 
 			<p></p>
 
 			<p:commandButton id="guardarCommandButton" 
-							 value="#{msg['button.guardar']}" 
+							 value="#{bundle['button.guardar']}" 
 							 ajax="true" 
 							 event="click" 
 							 actionListener="#{personaFisicaMBean.insertItemListener}" 
@@ -269,7 +294,7 @@
 			</p:commandButton>
 
 			<p:commandButton id="cancelarCommandButton" 
-							 value="#{msg['button.cancelar']}" 
+							 value="#{bundle['button.cancelar']}" 
 							 onclick="PF('wCreateItemDialog').hide()" 
 							 type="button">
 			</p:commandButton>
@@ -279,13 +304,13 @@
 		<p:confirmDialog id="eliminarConfirmDialog" 
 						 closable="true" 
 						 closeOnEscape="true" 
-						 header="#{msg['header.eliminar.registro']}" 
+						 header="#{bundle['header.eliminar.registro']}" 
 						 widgetVar="wEliminarConfirmDialog" 
 						 message="¿Desea eliminar los registros seleccionados?" 
 						 severity="alert">
 
 			<p:commandButton id="eliminarCommandButton" 
-							 value="#{msg['button.si']}">
+							 value="#{bundle['button.si']}">
 							 
 				<p:ajax event="click" 
 						listener="#{personaFisicaMBean.deleteItemsListener}" 
@@ -294,7 +319,7 @@
 					
 			</p:commandButton>
 
-			<p:commandButton value="#{msg['button.no']}" 
+			<p:commandButton value="#{bundle['button.no']}" 
 							 onclick="PF('wEliminarConfirmDialog').hide();" 
 							 type="button" />
 

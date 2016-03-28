@@ -13,9 +13,10 @@
 			<default-locale>en_US</default-locale>
 		</locale-config>
 		<resource-bundle>
-			<base-name>Messages</base-name>
-			<var>msg</var>
+			<base-name>ResourceBundle</base-name>
+			<var>bundle</var>
 	   	</resource-bundle>
+	   	<message-bundle>MessageBundle</message-bundle>
   	</application>
 	
 	<navigation-rule>
@@ -28,5 +29,17 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<validator>
+		<display-name>RfcValidator</display-name>
+		<validator-id>rfcValidator</validator-id>
+		<validator-class>org.mysat.faces.validators.RfcValidator</validator-class>
+	</validator>
+	
+	<validator>
+		<display-name>NombreApellidoValidator</display-name>
+		<validator-id>nombreApellidoValidator</validator-id>
+		<validator-class>org.mysat.faces.validators.NombreApellidoValidator</validator-class>
+	</validator>
 
 </faces-config>

@@ -115,10 +115,10 @@ public class PersonaFisicaManagedBean implements Serializable {
 		LOG.debug("Cancel edit");
 	}
 
-	public void onRfcValueChangeListener(ValueChangeEvent event) {
-		InputText inputText = (InputText)event.getSource();
+	public void onRfcKeyUpListener() {
+		String value = getProperties().getRfc();
 		
-		inputText.setValue(event.getNewValue().toString().toUpperCase());
+		getProperties().setRfc(value.toUpperCase());
 	}
 	
 	private void addMessage(String message, FacesMessage.Severity severity) {

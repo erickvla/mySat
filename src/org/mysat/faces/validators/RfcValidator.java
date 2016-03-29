@@ -10,10 +10,10 @@ import java.util.regex.Pattern;
  *
  */
 public class RfcValidator extends AbstractRegexValidator {
-	private final String RFC_REGEX = "/^[A-Za-z]{3,4}[ |\\-]{0,1}[0-9]{6}[ |\\-]{0,1}[0-9A-Za-z]{3}$";
+	private final String REGEX_RFC = "regex.rfc";
 
 	public RfcValidator() {
-		pattern = Pattern.compile(RFC_REGEX);
+		resourceBundleKey = REGEX_RFC;
 	}
 
 }

@@ -10,10 +10,10 @@ import java.util.regex.Pattern;
  *
  */
 public class NombreApellidoValidator extends AbstractRegexValidator {
-	private final String NOMBRE_REGEX = "/^[a-z ,.'-]+$/i";
+	private final String REGEX_NOMBRE_APELLIDO = "regex.nombre.apellido";
 
 	public NombreApellidoValidator() {
-		pattern = Pattern.compile(NOMBRE_REGEX);
+		resourceBundleKey = REGEX_NOMBRE_APELLIDO;
 	}
 
 }

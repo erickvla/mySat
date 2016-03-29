@@ -155,7 +155,8 @@
 									 label="RFC" 
 							 		 required="true" 
 							 		 size="15" 
-							 		 valueChangeListener="#{personaFisicaMBean.onRfcValueChangeListener}">
+							 		 style="text-transform: uppercase"
+							 		 converter="uppercaseConverter">
 							<f:validateLength for="editRfcInpTxt"
 											  minimum="13"
 											  maximum="13" />
@@ -271,10 +272,9 @@
 							 label="#{bundle['label.rfc']}" 
 							 required="true" 
 							 size="15" 
-							 value="#{personaFisicaMBean.properties.rfc}">
-					<p:ajax event="keyup"
-							update="@this" 
-							listener="#{personaFisicaMBean.onRfcKeyUpListener}" />
+							 value="#{personaFisicaMBean.properties.rfc}"
+							 style="text-transform: uppercase"
+							 converter="uppercaseConverter">
 					<f:validateLength for="apellidoInputText"
 									  minimum="13"
 									  maximum="13" />

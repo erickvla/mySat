@@ -114,12 +114,6 @@ public class PersonaFisicaManagedBean implements Serializable {
 	public void rowCancelListener(RowEditEvent event) {
 		LOG.debug("Cancel edit");
 	}
-
-	public void onRfcKeyUpListener() {
-		String value = getProperties().getRfc();
-		
-		getProperties().setRfc(value.toUpperCase());
-	}
 	
 	private void addMessage(String message, FacesMessage.Severity severity) {
 		FacesContext context = FacesContext.getCurrentInstance();

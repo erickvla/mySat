@@ -18,6 +18,12 @@
 	   	</resource-bundle>
 	   	<message-bundle>MessageBundle</message-bundle>
   	</application>
+  	
+	<converter>
+		<display-name>UppercaseConverter</display-name>
+		<converter-id>uppercaseConverter</converter-id>
+		<converter-class>org.mysat.faces.beans.converters.UppercaseConverter</converter-class>
+	</converter>
 	
 	<navigation-rule>
 		<display-name>login.xhtml</display-name>

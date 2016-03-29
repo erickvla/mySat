@@ -40,8 +40,8 @@
 	
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>cupertino</param-value>
-		<!-- <param-value>blitzer</param-value> -->
+		<!-- <param-value>cupertino</param-value> -->
+		<param-value>blitzer</param-value>
 	</context-param>
 
 	<listener>

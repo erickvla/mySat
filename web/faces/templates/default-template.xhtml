@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+
+<h:head>
+
+	<title><h:outputText value="#{bundle['app.name']}" /></title>
+
+</h:head>
+
+<h:body>
+
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="styles.css" />
+
+	<ui:debug hotkey="z"
+			  rendered="#{initParam['javax.faces.PROJECT_STAGE'] ne 'Production'}" />
+
+	<div id="header">
+		<ui:insert name="header">
+	    	Header area.  See comments below this line in the source.
+	    	<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
+			<!-- <ui:include src="header.xhtml"/> -->
+		</ui:insert>
+	</div>
+
+
+	<div id="content" class="container">
+
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+
+		<ui:insert name="content">
+		   	Content area.  See comments below this line in the source.
+		   	<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
+			<!-- <div> -->
+			<!-- <ui:include src="content.xhtml"/> -->
+			<!-- </div> -->
+		</ui:insert>
+
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+
+	</div>
+
+	<div id="footer">
+		<ui:insert name="footer">
+	    	Footer area.  See comments below this line in the source.
+	    	<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+			<!--<ui:include src="footer.xhtml"/>  -->
+		</ui:insert>
+	</div>
+
+</h:body>
+
+</html>

@@ -8,327 +8,323 @@
 	  xmlns:p="http://primefaces.org/ui" 
 	  xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
-<h:head>
-
-	<title>
-		<h:outputText value="#{bundle['app.name']}" />
-	</title>
+<ui:composition template="templates/default-template.xhtml">
 	
-</h:head>
+	<ui:define name="header">
+		  <ui:include src="templates/header.xhtml" />
+	</ui:define>
 
-<h:body class="container">
+    <ui:define name="content">	
 
-	<h:outputStylesheet library="css" 
-						name="bootstrap.css" />
-	<h:outputStylesheet library="css" 
-						name="styles.css" />
-
-	<ui:debug hotkey="z"
-			  rendered="#{initParam['javax.faces.PROJECT_STAGE'] ne 'Production'}" />
-
-	<h:form id="frmMySat">
-	
-		<p></p>
+		<h:form id="frmMySat">
 		
-		<h1>
-			<h:outputText value="#{bundle['app.name']}" />
-		</h1>
-		
-		<p></p>
-
-		<p:messages id="messages" 
-					showSummary="true" 
-					showDetail="false" />
-		
-		<p></p>
-
-		<p:dataTable id="itemsDataTable" 
-					 value="#{personaFisicaMBean.results.resultsList}" 
-					 var="pf" 
-					 rowExpandMode="single" 
-					 rowKey="#{pf.id}" 
-					 selection="#{personaFisicaMBean.selectedItems}" 
-					 editable="true">
-
-			<p:ajax event="rowEdit"
-					listener="#{personaFisicaMBean.updateItemListener}"
-					update="frmMySat:messages" />
-
-			<p:ajax event="rowEditCancel"
-					listener="#{personaFisicaMBean.rowCancelListener}" />
-					
-			<p:ajax event="rowSelect"
-					listener="#{personaFisicaMBean.rowSelectListener}" />
-
-			<f:facet name="header">
-			
-				<h4>
-					<h:outputText value="#{bundle['title.persona.fisica']}" />
-				</h4>
-				
-				<p:commandButton id="crearButton"  
-								 type="button" 
-								 onclick="PF('wCreateItemDialog').show();" 
-								 value="#{bundle['button.crear']}" />
-		
-				<p:commandButton id="eliminarButton" 
-								 type="button" 
-								 widgetVar="wEliminarButton"
-								 onclick="PF('wEliminarConfirmDialog').show();" 
-								 value="#{bundle['button.eliminar']}" />
-
-			</f:facet>
-
-			<p:column width="40">
-			
-				<p:rowToggler rendered="#{not empty pf.estudiantes}" />
-				
-			</p:column>
-
-			<p:column selectionMode="multiple" 
-					  width="40" />
-
-			<p:column headerText="#{bundle['column.nombre']}" 
-					  sortBy="#{pf.persona.nombre}" 
-					  filterBy="#{pf.persona.nombre}" 
-					  filterMatchMode="contains">
-
-				<p:cellEditor>
-					<f:facet name="output">
-						<h:outputText value="#{pf.persona.nombre}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="editNombreInpTxt" 
-									 value="#{pf.persona.nombre}" 
-									 label="Nombre" 
-							 		 required="true" 
-							 		 size="30">
-							<f:validateLength for="editNombreInpTxt"
-											  minimum="3"
-											  maximum="30" />
-							<f:validator for="editNombreInpTxt" 
-								 		 validatorId="nombreApellidoValidator" />
-						</p:inputText>
-					</f:facet>
-				</p:cellEditor>
-
-			</p:column>
-
-			<p:column headerText="#{bundle['column.apellido']}" 
-					  sortBy="#{pf.persona.apellido}" 
-					  filterBy="#{pf.persona.apellido}" 
-					  filterMatchMode="contains">
-
-				<p:cellEditor>
-					<f:facet name="output">
-						<h:outputText value="#{pf.persona.apellido}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="editApellidoInpTxt"
-									 value="#{pf.persona.apellido}" 
-									 label="Apellido" 
-							 		 required="true" 
-							 		 size="30">
-							<f:validateLength for="editApellidoInpTxt"
-											  minimum="3"
-											  maximum="30" />
-							<f:validator for="editApellidoInpTxt" 
-								 		 validatorId="nombreApellidoValidator" />
-						</p:inputText>
-					</f:facet>
-				</p:cellEditor>
-
-			</p:column>
-
-			<p:column headerText="#{bundle['column.rfc']}" 
-					  sortBy="#{pf.rfc}" 
-					  filterBy="#{pf.rfc}" 
-					  filterMatchMode="contains">
-
-				<p:cellEditor>
-					<f:facet name="output">
-						<h:outputText value="#{pf.rfc}" />
-					</f:facet>
-					<f:facet name="input">
-						<p:inputText id="editRfcInpTxt" 
-									 value="#{pf.rfc}" 
-									 label="RFC" 
-							 		 required="true" 
-							 		 size="15" 
-							 		 style="text-transform: uppercase"
-							 		 converter="uppercaseConverter">
-							<f:validateLength for="editRfcInpTxt"
-											  minimum="13"
-											  maximum="13" />
-							<f:validator for="editRfcInpTxt" 
-								 		 validatorId="rfcValidator" />
-						</p:inputText>
-					</f:facet>
-				</p:cellEditor>
-
-			</p:column>
-
-			<p:column width="55">
-				<p:rowEditor />
-			</p:column>
-
-			<f:facet name="footer">
-				<h:outputText value="Total Registros [#{fn:length(personaFisicaMBean.results.resultsList)}]" />
-			</f:facet>
-
-			<p:rowExpansion>
-
-				<p:dataTable id="itemsSubDatTbl" 
-							 value="#{pf.estudiantes}" 
-							 var="est" 
-							 rowKey="#{pf.id}" 
-							 style="margin: 30px">
-							 
-					<f:facet name="header">
-						
-						<h4>
-							<h:outputText value="#{bundle['title.estudiante']}" />
-						</h4>
-						
-					</f:facet>
-
-					<p:column headerText="#{bundle['column.nombre']}"
-							  sortBy="#{est.persona.nombre}">
-
-						<h:outputText value="#{est.persona.nombre}" />
-
-					</p:column>
-
-					<p:column headerText="#{bundle['column.apellido']}"
-							  sortBy="#{est.persona.apellido}">
-
-						<h:outputText value="#{est.persona.apellido}" />
-
-					</p:column>
-
-					<p:column  headerText="#{bundle['column.curp']}"
-							  sortBy="#{est.curp}">
-
-						<h:outputText value="#{est.curp}" />
-
-					</p:column>
-
-				</p:dataTable>
-
-			</p:rowExpansion>
-
-		</p:dataTable>
-
-		<p:dialog id="createItemDialog" 
-				  closable="true" 
-				  draggable="false" 
-				  maximizable="false" 
-				  modal="true" 
-				  position="center" 
-				  resizable="false" 
-				  widgetVar="wCreateItemDialog" 
-				  width="550" 
-				  header="#{bundle['header.crear.registro']}">
-
-			<p:panelGrid id="createItemPanelGrid" 
-						 columns="2" 
-						 layout="grid" 
-						 columnClasses="fs.label, fs.input">
-
-				<p:outputLabel for="nombreInputText" 
-							   value="#{bundle['label.nombre']}" />
-
-				<p:inputText id="nombreInputText" 
-							 label="#{bundle['label.nombre']}" 
-							 required="true" 
-							 size="30" 
-							 value="#{personaFisicaMBean.properties.persona.nombre}">
-					<f:validateLength for="nombreInputText"
-									  minimum="3"
-									  maximum="30" />
-					<f:validator for="nombreInputText" 
-								 validatorId="nombreApellidoValidator" />
-				</p:inputText>
-
-				<p:outputLabel for="apellidoInputText"
-							   value="#{bundle['label.apellido']}" />
-
-				<p:inputText id="apellidoInputText" 
-							 label="#{bundle['label.apellido']}" 
-							 required="true" 
-							 size="30" 
-							 value="#{personaFisicaMBean.properties.persona.apellido}">
-					<f:validateLength for="apellidoInputText"
-									  minimum="3"
-									  maximum="30" />
-					<f:validator for="apellidoInputText" 
-								 validatorId="nombreApellidoValidator" />
-				</p:inputText>
-
-				<p:outputLabel for="rfcInputText"
-							   value="#{bundle['label.rfc']}" />
-
-				<p:inputText id="rfcInputText" 
-							 label="#{bundle['label.rfc']}" 
-							 required="true" 
-							 size="15" 
-							 value="#{personaFisicaMBean.properties.rfc}"
-							 style="text-transform: uppercase"
-							 converter="uppercaseConverter">
-					<f:validateLength for="apellidoInputText"
-									  minimum="13"
-									  maximum="13" />
-					<f:validator for="rfcInputText" 
-								 validatorId="rfcValidator" />
-				</p:inputText>
-
-			</p:panelGrid>
-
 			<p></p>
-
-			<p:commandButton id="guardarCommandButton" 
-							 value="#{bundle['button.guardar']}" 
-							 ajax="true" 
-							 event="click" 
-							 actionListener="#{personaFisicaMBean.insertItemListener}" 
-							 oncomplete="PF('wCreateItemDialog').hide()" 
-							 update="itemsDataTable messages">
-			</p:commandButton>
-
-			<p:commandButton id="cancelarCommandButton" 
-							 value="#{bundle['button.cancelar']}" 
-							 onclick="PF('wCreateItemDialog').hide()" 
-							 type="button">
-			</p:commandButton>
-
-		</p:dialog>
-
-		<p:confirmDialog id="eliminarConfirmDialog" 
-						 closable="true" 
-						 closeOnEscape="true" 
-						 header="#{bundle['header.eliminar.registro']}" 
-						 widgetVar="wEliminarConfirmDialog" 
-						 message="¿Desea eliminar los registros seleccionados?" 
-						 severity="alert">
-
-			<p:commandButton id="eliminarCommandButton" 
-							 value="#{bundle['button.si']}">
-							 
-				<p:ajax event="click" 
-						listener="#{personaFisicaMBean.deleteItemsListener}" 
-						oncomplete="PF('wEliminarConfirmDialog').hide()" 
-						update="itemsDataTable messages" />
+			
+			<h1>
+				<h:outputText value="#{bundle['app.name']}" />
+			</h1>
+			
+			<p></p>
+	
+			<p:messages id="messages" 
+						showSummary="true" 
+						showDetail="false" />
+			
+			<p></p>
+	
+			<p:dataTable id="itemsDataTable" 
+						 value="#{personaFisicaMBean.results.resultsList}" 
+						 var="pf" 
+						 rowExpandMode="single" 
+						 rowKey="#{pf.id}" 
+						 selection="#{personaFisicaMBean.selectedItems}" 
+						 editable="true">
+	
+				<p:ajax event="rowEdit"
+						listener="#{personaFisicaMBean.updateItemListener}"
+						update="frmMySat:messages" />
+	
+				<p:ajax event="rowEditCancel"
+						listener="#{personaFisicaMBean.rowCancelListener}" />
+						
+				<p:ajax event="rowSelect"
+						listener="#{personaFisicaMBean.rowSelectListener}" />
+	
+				<f:facet name="header">
+				
+					<h4>
+						<h:outputText value="#{bundle['title.persona.fisica']}" />
+					</h4>
 					
-			</p:commandButton>
+					<p:commandButton id="crearButton"  
+									 type="button" 
+									 onclick="PF('wCreateItemDialog').show();" 
+									 value="#{bundle['button.crear']}" />
+			
+					<p:commandButton id="eliminarButton" 
+									 type="button" 
+									 widgetVar="wEliminarButton"
+									 onclick="PF('wEliminarConfirmDialog').show();" 
+									 value="#{bundle['button.eliminar']}" />
+	
+				</f:facet>
+	
+				<p:column width="40">
+				
+					<p:rowToggler rendered="#{not empty pf.estudiantes}" />
+					
+				</p:column>
+	
+				<p:column selectionMode="multiple" 
+						  width="40" />
+	
+				<p:column headerText="#{bundle['column.nombre']}" 
+						  sortBy="#{pf.persona.nombre}" 
+						  filterBy="#{pf.persona.nombre}" 
+						  filterMatchMode="contains">
+	
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{pf.persona.nombre}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="editNombreInpTxt" 
+										 value="#{pf.persona.nombre}" 
+										 label="Nombre" 
+								 		 required="true" 
+								 		 size="30">
+								<f:validateLength for="editNombreInpTxt"
+												  minimum="3"
+												  maximum="30" />
+								<f:validator for="editNombreInpTxt" 
+									 		 validatorId="nombreApellidoValidator" />
+							</p:inputText>
+						</f:facet>
+					</p:cellEditor>
+	
+				</p:column>
+	
+				<p:column headerText="#{bundle['column.apellido']}" 
+						  sortBy="#{pf.persona.apellido}" 
+						  filterBy="#{pf.persona.apellido}" 
+						  filterMatchMode="contains">
+	
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{pf.persona.apellido}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="editApellidoInpTxt"
+										 value="#{pf.persona.apellido}" 
+										 label="Apellido" 
+								 		 required="true" 
+								 		 size="30">
+								<f:validateLength for="editApellidoInpTxt"
+												  minimum="3"
+												  maximum="30" />
+								<f:validator for="editApellidoInpTxt" 
+									 		 validatorId="nombreApellidoValidator" />
+							</p:inputText>
+						</f:facet>
+					</p:cellEditor>
+	
+				</p:column>
+	
+				<p:column headerText="#{bundle['column.rfc']}" 
+						  sortBy="#{pf.rfc}" 
+						  filterBy="#{pf.rfc}" 
+						  filterMatchMode="contains">
+	
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{pf.rfc}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText id="editRfcInpTxt" 
+										 value="#{pf.rfc}" 
+										 label="RFC" 
+								 		 required="true" 
+								 		 size="15" 
+								 		 style="text-transform: uppercase"
+								 		 converter="uppercaseConverter">
+								<f:validateLength for="editRfcInpTxt"
+												  minimum="13"
+												  maximum="13" />
+								<f:validator for="editRfcInpTxt" 
+									 		 validatorId="rfcValidator" />
+							</p:inputText>
+						</f:facet>
+					</p:cellEditor>
+	
+				</p:column>
+	
+				<p:column width="55">
+					<p:rowEditor />
+				</p:column>
+	
+				<f:facet name="footer">
+					<h:outputText value="Total Registros [#{fn:length(personaFisicaMBean.results.resultsList)}]" />
+				</f:facet>
+	
+				<p:rowExpansion>
+	
+					<p:dataTable id="itemsSubDatTbl" 
+								 value="#{pf.estudiantes}" 
+								 var="est" 
+								 rowKey="#{pf.id}" 
+								 style="margin: 30px">
+								 
+						<f:facet name="header">
+							
+							<h4>
+								<h:outputText value="#{bundle['title.estudiante']}" />
+							</h4>
+							
+						</f:facet>
+	
+						<p:column headerText="#{bundle['column.nombre']}"
+								  sortBy="#{est.persona.nombre}">
+	
+							<h:outputText value="#{est.persona.nombre}" />
+	
+						</p:column>
+	
+						<p:column headerText="#{bundle['column.apellido']}"
+								  sortBy="#{est.persona.apellido}">
+	
+							<h:outputText value="#{est.persona.apellido}" />
+	
+						</p:column>
+	
+						<p:column  headerText="#{bundle['column.curp']}"
+								  sortBy="#{est.curp}">
+	
+							<h:outputText value="#{est.curp}" />
+	
+						</p:column>
+	
+					</p:dataTable>
+	
+				</p:rowExpansion>
+	
+			</p:dataTable>
+	
+			<p:dialog id="createItemDialog" 
+					  closable="true" 
+					  draggable="false" 
+					  maximizable="false" 
+					  modal="true" 
+					  position="center" 
+					  resizable="false" 
+					  widgetVar="wCreateItemDialog" 
+					  width="550" 
+					  header="#{bundle['header.crear.registro']}">
+	
+				<p:panelGrid id="createItemPanelGrid" 
+							 columns="2" 
+							 layout="grid" 
+							 columnClasses="fs.label, fs.input">
+	
+					<p:outputLabel for="nombreInputText" 
+								   value="#{bundle['label.nombre']}" />
+	
+					<p:inputText id="nombreInputText" 
+								 label="#{bundle['label.nombre']}" 
+								 required="true" 
+								 size="30" 
+								 value="#{personaFisicaMBean.properties.persona.nombre}">
+						<f:validateLength for="nombreInputText"
+										  minimum="3"
+										  maximum="30" />
+						<f:validator for="nombreInputText" 
+									 validatorId="nombreApellidoValidator" />
+					</p:inputText>
+	
+					<p:outputLabel for="apellidoInputText"
+								   value="#{bundle['label.apellido']}" />
+	
+					<p:inputText id="apellidoInputText" 
+								 label="#{bundle['label.apellido']}" 
+								 required="true" 
+								 size="30" 
+								 value="#{personaFisicaMBean.properties.persona.apellido}">
+						<f:validateLength for="apellidoInputText"
+										  minimum="3"
+										  maximum="30" />
+						<f:validator for="apellidoInputText" 
+									 validatorId="nombreApellidoValidator" />
+					</p:inputText>
+	
+					<p:outputLabel for="rfcInputText"
+								   value="#{bundle['label.rfc']}" />
+	
+					<p:inputText id="rfcInputText" 
+								 label="#{bundle['label.rfc']}" 
+								 required="true" 
+								 size="15" 
+								 value="#{personaFisicaMBean.properties.rfc}"
+								 style="text-transform: uppercase"
+								 converter="uppercaseConverter">
+						<f:validateLength for="apellidoInputText"
+										  minimum="13"
+										  maximum="13" />
+						<f:validator for="rfcInputText" 
+									 validatorId="rfcValidator" />
+					</p:inputText>
+	
+				</p:panelGrid>
+	
+				<p></p>
+	
+				<p:commandButton id="guardarCommandButton" 
+								 value="#{bundle['button.guardar']}" 
+								 ajax="true" 
+								 event="click" 
+								 actionListener="#{personaFisicaMBean.insertItemListener}" 
+								 oncomplete="PF('wCreateItemDialog').hide()" 
+								 update="itemsDataTable messages">
+				</p:commandButton>
+	
+				<p:commandButton id="cancelarCommandButton" 
+								 value="#{bundle['button.cancelar']}" 
+								 onclick="PF('wCreateItemDialog').hide()" 
+								 type="button">
+				</p:commandButton>
+	
+			</p:dialog>
+	
+			<p:confirmDialog id="eliminarConfirmDialog" 
+							 closable="true" 
+							 closeOnEscape="true" 
+							 header="#{bundle['header.eliminar.registro']}" 
+							 widgetVar="wEliminarConfirmDialog" 
+							 message="¿Desea eliminar los registros seleccionados?" 
+							 severity="alert">
+	
+				<p:commandButton id="eliminarCommandButton" 
+								 value="#{bundle['button.si']}">
+								 
+					<p:ajax event="click" 
+							listener="#{personaFisicaMBean.deleteItemsListener}" 
+							oncomplete="PF('wEliminarConfirmDialog').hide()" 
+							update="itemsDataTable messages" />
+						
+				</p:commandButton>
+	
+				<p:commandButton value="#{bundle['button.no']}" 
+								 onclick="PF('wEliminarConfirmDialog').hide();" 
+								 type="button" />
+	
+			</p:confirmDialog>
+	
+		</h:form>
+	
+	</ui:define>
+	
+	<ui:define name="footer">
+		  <ui:include src="templates/footer.xhtml" />
+	</ui:define>
 
-			<p:commandButton value="#{bundle['button.no']}" 
-							 onclick="PF('wEliminarConfirmDialog').hide();" 
-							 type="button" />
-
-		</p:confirmDialog>
-
-	</h:form>
-
-</h:body>
+</ui:composition>
 
 </html>

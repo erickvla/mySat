@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	  xmlns:h="http://xmlns.jcp.org/jsf/html" 
+	  xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	  xmlns:p="http://primefaces.org/ui" 
+	  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	  xmlns:cc="http://java.sun.com/jsf/composite">
+	  
+	<cc:interface>
+    
+    	<cc:attribute name="id" />
+    	<!-- AJAX EVENT LISTENER -->
+    	<cc:attribute name="ajaxEventListener" 
+    				  method-signature="void listener()" />
+    		
+    </cc:interface>
+	
+    <cc:implementation>
+
+		<p:confirmDialog id="#{cc.attrs.id}" 
+						 closable="true" 
+						 closeOnEscape="true" 
+						 header="#{bundle['header.eliminar.registro']}" 
+						 widgetVar="wEliminarConfirmDialog" 
+						 message="¿Desea eliminar los registros seleccionados?" 
+						 severity="alert">
+
+			<p:commandButton id="eliminarCommandButton" 
+							 value="#{bundle['button.si']}">
+							 
+				<p:ajax event="click" 
+						listener="#{cc.attrs.ajaxEventListener}" 
+						oncomplete="PF('wEliminarConfirmDialog').hide()" 
+						update=":frmMySat:itemsDataTable :frmMySat:messages" />
+					
+			</p:commandButton>
+
+			<p:commandButton value="#{bundle['button.no']}" 
+							 onclick="PF('wEliminarConfirmDialog').hide();" 
+							 type="button" />
+
+		</p:confirmDialog>
+			
+	</cc:implementation>
+
+</html>

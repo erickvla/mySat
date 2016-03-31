@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+	  xmlns:h="http://xmlns.jcp.org/jsf/html" 
+	  xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	  xmlns:p="http://primefaces.org/ui" 
+	  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	  xmlns:cc="http://java.sun.com/jsf/composite">
+	  
+	<cc:interface>
+	
+		<cc:attribute name="dtValue"></cc:attribute>
+		<cc:attribute name="dtVar"></cc:attribute>
+		<cc:attribute name="dtRowKey"></cc:attribute>
+		<cc:attribute name="dtSelection"></cc:attribute>
+		<cc:attribute name="dtHeader"></cc:attribute>
+		<cc:attribute name="dtFooter"></cc:attribute>
+		
+		<!-- AJAX EVENT LISTENER -->
+    	<cc:attribute name="dtAjaxUpdateListener" 
+    				  method-signature="void listener()" />
+    				  
+    	<cc:attribute name="dtAjaxCancelListener" 
+    				  method-signature="void listener()" />
+    	
+    	<cc:attribute name="dtAjaxSelectListener" 
+    				  method-signature="void listener()" />
+    				  
+    	<cc:attribute name="dtAjaxViewListener" 
+    				  method-signature="void listener()" />
+    		
+    </cc:interface>
+	
+    <cc:implementation>
+
+		<p:dataTable id="itemsDataTable" 
+					 value="#{cc.attrs.dtValue}" 
+					 var="#{cc.attrs.dtVar}" 
+					 rowExpandMode="single" 
+					 rowKey="#{cc.attrs.dtRowKey}" 
+					 selection="#{cc.attrs.dtSelection}" 
+					 editable="true">
+
+			<p:ajax event="rowEdit"
+					listener="#{cc.attrs.dtAjaxUpdateListener}"
+					update="frmMySat:messages" />
+
+			<p:ajax event="rowEditCancel"
+					listener="#{cc.attrs.dtAjaxCancelListener}" />
+					
+			<p:ajax event="rowSelect"
+					listener="#{cc.attrs.dtAjaxSelectListener}" />
+
+			<f:facet name="header">
+			
+				<h4>
+					<h:outputText value="#{cc.attrs.dtHeader}" />
+				</h4>
+				
+				<p:commandButton id="crearButton"  
+								 type="button" 
+								 onclick="PF('wCreateItemDialog').show();" 
+								 value="#{bundle['button.crear']}" />
+		
+				<p:commandButton id="eliminarButton" 
+								 type="button" 
+								 widgetVar="wEliminarButton"
+								 onclick="PF('wEliminarConfirmDialog').show();" 
+								 value="#{bundle['button.eliminar']}" />
+
+			</f:facet>
+
+			<p:column selectionMode="multiple" 
+					  width="40" />
+					  
+			<cc:insertChildren></cc:insertChildren>
+
+			<p:column width="55">
+			
+				<p:rowEditor />
+
+			</p:column>
+			
+			<p:column width="55">
+			
+				<p:commandButton id="viewItemCmdBtn" 
+								 icon="fa-eye" 
+								 type="button" 
+								 title="View">
+								 
+					<p:ajax event="click" 
+							listener="#{cc.attrs.dtAjaxViewListener}"
+							oncomplete="PF('wViewItemDlg').show()" 
+							update=":frmMySat:viewItemOutPnl" />
+					
+				</p:commandButton>
+
+			</p:column>
+
+			<f:facet name="footer">
+			
+				<h:outputText value="#{cc.attrs.dtHeader}" />
+		
+			</f:facet>
+
+		</p:dataTable>
+			
+	</cc:implementation>
+
+</html>

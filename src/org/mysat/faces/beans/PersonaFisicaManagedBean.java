@@ -45,6 +45,7 @@ public class PersonaFisicaManagedBean implements Serializable {
 	@ManagedProperty(value = "#{personaFisicaCtrl}")
 	private PersonaFisicaController controller;
 	private PersonaFisica properties;
+	private PersonaFisica selected;
 	private List<PersonaFisica> selectedItems;
 	
 	public PersonaFisicaManagedBean() {
@@ -59,7 +60,7 @@ public class PersonaFisicaManagedBean implements Serializable {
 		return "success";
 	}
 
-	public void insertItemListener(ActionEvent event) {
+	public void insertItemListener() {
 
 		try {
 			getController().insert(getProperties());
@@ -74,7 +75,7 @@ public class PersonaFisicaManagedBean implements Serializable {
 		}
 	}
 
-	public void deleteItemsListener(AjaxBehaviorEvent event) {
+	public void deleteItemsListener() {
 		LOG.debug(getSelectedItems());
 		
 		getController().delete(getSelectedItems());
@@ -109,6 +110,10 @@ public class PersonaFisicaManagedBean implements Serializable {
 		} catch (RollbackException rException) {
 			addMessage("El registro no pudo ser guardado, tal vez exista un registro con los mismos datos.", FacesMessage.SEVERITY_ERROR);
 		}
+	}
+	
+	public void viewItemListener(PersonaFisica item) {
+		setSelected(item);
 	}
 	
 	public void rowCancelListener(RowEditEvent event) {
@@ -189,6 +194,20 @@ public class PersonaFisicaManagedBean implements Serializable {
 
 	public void setSelectedItems(List<PersonaFisica> selectedItems) {
 		this.selectedItems = selectedItems;
+	}
+
+	public PersonaFisica getSelected() {
+		return selected;
+	}
+
+	public void setSelected(PersonaFisica selected) {
+		this.selected = selected;
+	}
+
+	@Override
+	public String toString() {
+		return "PersonaFisicaManagedBean [results=" + results + ", properties=" + properties + ", selected=" + selected
+				+ ", selectedItems=" + selectedItems + "]";
 	}
 
 }

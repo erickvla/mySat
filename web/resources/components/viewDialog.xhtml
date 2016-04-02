@@ -10,12 +10,14 @@
 	  xmlns:cc="http://java.sun.com/jsf/composite">
 	  
 	<cc:interface>
+	
+		<cc:attribute name="id" />
     		
     </cc:interface>
 	
     <cc:implementation>
 
-		<p:dialog id="viewItemDlg" 
+		<p:dialog id="#{cc.attrs.id}" 
 				  closable="true" 
 				  draggable="false" 
 				  maximizable="false" 

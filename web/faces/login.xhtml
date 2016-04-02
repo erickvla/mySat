@@ -25,8 +25,11 @@
 
 	<h:form id="mysatForm">
 
-		<p:commandButton value="PERSONA FISICA" 
+		<p:commandButton value="#{bundle['title.persona.fisica']}" 
 						 action="#{personaFisicaMBean.loadDashboard}" />
+						 
+		<p:commandButton value="#{bundle['title.estudiante']}" 
+						 action="#{estudianteMBean.loadDashboard}" />
 
 	</h:form>
 

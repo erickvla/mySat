@@ -36,6 +36,17 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<display-name>login.xhtml</display-name>
+		<from-view-id>/faces/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{estudianteMBean.loadDashboard}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/faces/estudiante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
 	<validator>
 		<display-name>RfcValidator</display-name>
 		<validator-id>rfcValidator</validator-id>
@@ -46,6 +57,12 @@
 		<display-name>NombreApellidoValidator</display-name>
 		<validator-id>nombreApellidoValidator</validator-id>
 		<validator-class>org.mysat.faces.validators.NombreApellidoValidator</validator-class>
+	</validator>
+	
+	<validator>
+		<display-name>CurpValidator</display-name>
+		<validator-id>curpValidator</validator-id>
+		<validator-class>org.mysat.faces.validators.CurpValidator</validator-class>
 	</validator>
 
 </faces-config>

@@ -5,13 +5,27 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="personaFisicaDao" class="org.mysat.persistence.daos.PersonaFisicaDao" />
+	<bean id="estudianteDao" 
+		  class="org.mysat.persistence.daos.EstudianteDao" />
 	
-	<bean id="personaDao" class="org.mysat.persistence.daos.PersonaDao" />
+	<bean id="personaFisicaDao" 
+		  class="org.mysat.persistence.daos.PersonaFisicaDao" />
+	
+	<bean id="personaDao" 
+		  class="org.mysat.persistence.daos.PersonaDao" />
 
-	<bean id="personaFisicaCtrl" class="org.mysat.persistence.controllers.PersonaFisicaController">
+	<bean id="personaFisicaCtrl" 
+		  class="org.mysat.persistence.controllers.PersonaFisicaController">
 		<property name="personaFisicaDao" 
 				  ref="personaFisicaDao" />
+		<property name="personaDao" 
+				  ref="personaDao" />
+	</bean>
+	
+	<bean id="estudianteCtrl" 
+		  class="org.mysat.persistence.controllers.EstudianteController">
+		<property name="estudianteDao" 
+				  ref="estudianteDao" />
 		<property name="personaDao" 
 				  ref="personaDao" />
 	</bean>

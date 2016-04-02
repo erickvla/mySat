@@ -18,7 +18,7 @@
     <ui:define name="content">	
 
 		<h:form id="frmMySat">
-			
+		
 			<p></p>
 	
 			<p:messages id="messages" 
@@ -28,27 +28,27 @@
 			<p></p>
 			
 			<p:dataTable id="itemsDataTable" 
-						 value="#{personaFisicaMBean.results.resultsList}" 
-						 var="pf" 
+						 value="#{estudianteMBean.results.resultsList}" 
+						 var="est" 
 						 rowExpandMode="single" 
-						 rowKey="#{pf.id}" 
-						 selection="#{personaFisicaMBean.selectedItems}" 
+						 rowKey="#{est.id}" 
+						 selection="#{estudianteMBean.selectedItems}" 
 						 editable="true">
 						 
 				<p:ajax event="rowEdit"
-						listener="#{personaFisicaMBean.updateItemListener}"
+						listener="#{estudianteMBean.updateItemListener}"
 						update="frmMySat:messages" />
 	
 				<p:ajax event="rowEditCancel"
-						listener="#{personaFisicaMBean.rowCancelListener}" />
+						listener="#{estudianteMBean.rowCancelListener}" />
 						
 				<p:ajax event="rowSelect"
-						listener="#{personaFisicaMBean.rowSelectListener}" />
+						listener="#{estudianteMBean.rowSelectListener}" />
 		
 					<f:facet name="header">
 					
 						<h4>
-							<h:outputText value="#{bundle['title.persona.fisica']}" />
+							<h:outputText value="#{bundle['title.estudiante']}" />
 						</h4>
 						
 						<p:commandButton id="crearButton"  
@@ -68,17 +68,17 @@
 							  width="40" />
 			
 						<p:column headerText="#{bundle['column.nombre']}" 
-								  sortBy="#{pf.persona.nombre}" 
-								  filterBy="#{pf.persona.nombre}" 
+								  sortBy="#{est.persona.nombre}" 
+								  filterBy="#{est.persona.nombre}" 
 								  filterMatchMode="contains">
 			
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{pf.persona.nombre}" />
+									<h:outputText value="#{est.persona.nombre}" />
 								</f:facet>
 								<f:facet name="input">
 									<p:inputText id="editNombreInpTxt" 
-												 value="#{pf.persona.nombre}" 
+												 value="#{est.persona.nombre}" 
 												 label="Nombre" 
 										 		 required="true" 
 										 		 size="30">
@@ -94,17 +94,17 @@
 						</p:column>
 			
 						<p:column headerText="#{bundle['column.apellido']}" 
-								  sortBy="#{pf.persona.apellido}" 
-								  filterBy="#{pf.persona.apellido}" 
+								  sortBy="#{est.persona.apellido}" 
+								  filterBy="#{est.persona.apellido}" 
 								  filterMatchMode="contains">
 			
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{pf.persona.apellido}" />
+									<h:outputText value="#{est.persona.apellido}" />
 								</f:facet>
 								<f:facet name="input">
 									<p:inputText id="editApellidoInpTxt"
-												 value="#{pf.persona.apellido}" 
+												 value="#{est.persona.apellido}" 
 												 label="Apellido" 
 										 		 required="true" 
 										 		 size="30">
@@ -119,28 +119,28 @@
 			
 						</p:column>
 			
-						<p:column headerText="#{bundle['column.rfc']}" 
-								  sortBy="#{pf.rfc}" 
-								  filterBy="#{pf.rfc}" 
+						<p:column headerText="#{bundle['column.curp']}" 
+								  sortBy="#{est.curp}" 
+								  filterBy="#{est.curp}" 
 								  filterMatchMode="contains">
 			
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{pf.rfc}" />
+									<h:outputText value="#{est.curp}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="editRfcInpTxt" 
-												 value="#{pf.rfc}" 
-												 label="RFC" 
+									<p:inputText id="editCurpInpTxt" 
+												 value="#{est.curp}" 
+												 label="CURP" 
 										 		 required="true" 
-										 		 size="15" 
+										 		 size="20" 
 										 		 style="text-transform: uppercase"
 										 		 converter="uppercaseConverter">
-										<f:validateLength for="editRfcInpTxt"
-														  minimum="13"
-														  maximum="13" />
-										<f:validator for="editRfcInpTxt" 
-											 		 validatorId="rfcValidator" />
+										<f:validateLength for="editCurpInpTxt"
+														  minimum="18"
+														  maximum="18" />
+										<f:validator for="editCurpInpTxt" 
+											 		 validatorId="curpValidator" />
 									</p:inputText>
 								</f:facet>
 							</p:cellEditor>
@@ -161,7 +161,7 @@
 											 title="View">
 											 
 								<p:ajax event="click" 
-										listener="#{personaFisicaMBean.viewItemListener(pf)}"
+										listener="#{estudianteMBean.viewItemListener(est)}"
 										oncomplete="PF('wViewItemDlg').show()" 
 										update=":frmMySat:viewItemDlg:viewItemOutPnl" />
 								
@@ -188,48 +188,48 @@
 					
 					<h:outputText value="#{bundle['label.apellido']}" />
 					
-					<h:outputText value="#{bundle['label.rfc']}" />
+					<h:outputText value="#{bundle['label.curp']}" />
 					
-					<h:outputText value="#{personaFisicaMBean.selected.persona.nombre}" />
+					<h:outputText value="#{estudianteMBean.selected.persona.nombre}" />
 					
-					<h:outputText value="#{personaFisicaMBean.selected.persona.apellido}" />
+					<h:outputText value="#{estudianteMBean.selected.persona.apellido}" />
 					
-					<h:outputText value="#{personaFisicaMBean.selected.rfc}" />
+					<h:outputText value="#{estudianteMBean.selected.curp}" />
 				
 				</p:panelGrid>
 				
 				<p:dataTable id="viewItemDatTbl" 
-							 value="#{personaFisicaMBean.selected.estudiantes}" 
-							 var="est" 
-							 rowKey="#{est.id}" 
+							 value="#{estudianteMBean.selected.personaFisicas}" 
+							 var="pf" 
+							 rowKey="#{pf.id}" 
 							 style="margin: 30px">
 							 
 					<f:facet name="header">
 						
 						<h4>
-							<h:outputText value="#{bundle['title.estudiante']}" />
+							<h:outputText value="#{bundle['title.persona.fisica']}" />
 						</h4>
 						
 					</f:facet>
 
 					<p:column headerText="#{bundle['column.nombre']}"
-							  sortBy="#{est.persona.nombre}">
+							  sortBy="#{pf.persona.nombre}">
 
-						<h:outputText value="#{est.persona.nombre}" />
+						<h:outputText value="#{pf.persona.nombre}" />
 
 					</p:column>
 
 					<p:column headerText="#{bundle['column.apellido']}"
-							  sortBy="#{est.persona.apellido}">
+							  sortBy="#{pf.persona.apellido}">
 
-						<h:outputText value="#{est.persona.apellido}" />
+						<h:outputText value="#{pf.persona.apellido}" />
 
 					</p:column>
 
-					<p:column  headerText="#{bundle['column.curp']}"
-							  sortBy="#{est.curp}">
+					<p:column  headerText="#{bundle['column.rfc']}"
+							  sortBy="#{pf.rfc}">
 
-						<h:outputText value="#{est.curp}" />
+						<h:outputText value="#{pf.rfc}" />
 
 					</p:column>
 
@@ -238,7 +238,7 @@
 			</mysat:viewDialog>
 			
 			<mysat:insertDialog id="createItemDialog" 
-								ajaxActionListener="#{personaFisicaMBean.insertItemListener}">
+								ajaxActionListener="#{estudianteMBean.insertItemListener}">
 								
 				<p:outputLabel for="nombreInputText" 
 							   value="#{bundle['label.nombre']}" />
@@ -247,7 +247,7 @@
 							 label="#{bundle['label.nombre']}" 
 							 required="true" 
 							 size="30" 
-							 value="#{personaFisicaMBean.properties.persona.nombre}">
+							 value="#{estudianteMBean.properties.persona.nombre}">
 					<f:validateLength for="nombreInputText"
 									  minimum="3"
 									  maximum="30" />
@@ -262,7 +262,7 @@
 							 label="#{bundle['label.apellido']}" 
 							 required="true" 
 							 size="30" 
-							 value="#{personaFisicaMBean.properties.persona.apellido}">
+							 value="#{estudianteMBean.properties.persona.apellido}">
 					<f:validateLength for="apellidoInputText"
 									  minimum="3"
 									  maximum="30" />
@@ -270,28 +270,28 @@
 								 validatorId="nombreApellidoValidator" />
 				</p:inputText>
 
-				<p:outputLabel for="rfcInputText"
-							   value="#{bundle['label.rfc']}" />
+				<p:outputLabel for="curpInputText"
+							   value="#{bundle['label.curp']}" />
 
-				<p:inputText id="rfcInputText" 
-							 label="#{bundle['label.rfc']}" 
+				<p:inputText id="curpInputText" 
+							 label="#{bundle['label.curp']}" 
 							 required="true" 
-							 size="15" 
-							 value="#{personaFisicaMBean.properties.rfc}"
+							 size="20" 
+							 value="#{estudianteMBean.properties.curp}"
 							 style="text-transform: uppercase"
 							 converter="uppercaseConverter">
-					<f:validateLength for="apellidoInputText"
-									  minimum="13"
-									  maximum="13" />
-					<f:validator for="rfcInputText" 
-								 validatorId="rfcValidator" />
+					<f:validateLength for="curpInputText"
+									  minimum="18"
+									  maximum="18" />
+					<f:validator for="curpInputText" 
+								 validatorId="curpValidator" />
 				</p:inputText>
 								
 								
 			</mysat:insertDialog>
 			
 			<mysat:deleteConfirmDialog id="eliminarConfirmDialog" 
-									   ajaxEventListener="#{personaFisicaMBean.deleteItemsListener}" />
+									   ajaxEventListener="#{estudianteMBean.deleteItemsListener}" />
 	
 		</h:form>
 	

@@ -12,6 +12,7 @@ import javax.persistence.RollbackException;
 
 import org.mysat.Constants;
 import org.mysat.persistence.entities.Estudiante;
+import org.mysat.persistence.entities.PersonaFisica;
 
 /**
  * @author imac
@@ -136,6 +137,14 @@ public class EstudianteDao extends AbstractDao<Estudiante, Long> implements Seri
 	
 	public void insert(Estudiante item) throws RollbackException, IllegalArgumentException {
 		super.insert(item);
+	}
+	
+	public void update(Estudiante item) throws RollbackException, IllegalArgumentException {
+		super.update(item);
+	}
+
+	public void delete(Estudiante item) {
+		super.delete(item.getId());
 	}
 
 }

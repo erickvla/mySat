@@ -9,9 +9,31 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 
-<div
-	style="width: 100%; font-size: 36px; line-height: 48px; background-color: navy; color: white">
+<div style="width: 100%; font-size: 36px; line-height: 48px; background-color: navy; color: white">
+
 	<h:outputText value="#{bundle['app.name']}" />
+
 </div>
+
+<h:form id="frmMenu">
+
+	<p:menubar>
+	
+		<p:submenu label="#{bundle['title.persona.fisica']}" 
+				   icon="ui-icon-document">
+			<p:menuitem value="Home" 
+						action="#{personaFisicaMBean.loadDashboard}" 
+						outcome="/faces/persona-fisica.xhtml" />
+		</p:submenu>
+
+		<p:submenu label="#{bundle['title.estudiante']}" 
+				   icon="ui-icon-document">
+			<p:menuitem value="Home" 
+						action="#{estudianteMBean.loadDashboard}" 
+						outcome="/faces/estudiante.xhtml" />
+		</p:submenu>
+		
+	</p:menubar>
+</h:form>
 
 </html>

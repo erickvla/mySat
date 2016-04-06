@@ -26,23 +26,27 @@
 	</converter>
 	
 	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/faces/login.xhtml</from-view-id>
+		<display-name>ANY PAGE</display-name>
+		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-action>#{personaFisicaMBean.loadDashboard}</from-action>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/faces/persona-fisica.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
-		<display-name>login.xhtml</display-name>
-		<from-view-id>/faces/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-action>#{estudianteMBean.loadDashboard}</from-action>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/faces/estudiante.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<display-name>ANY PAGE</display-name>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/faces/login.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

@@ -17,23 +17,29 @@
 
 <h:form id="frmMenu">
 
-	<p:menubar>
+	<p:toolbar id="menuTlbr">
 	
-		<p:submenu label="#{bundle['title.persona.fisica']}" 
-				   icon="ui-icon-document">
-			<p:menuitem value="Home" 
-						action="#{personaFisicaMBean.loadDashboard}" 
-						outcome="/faces/persona-fisica.xhtml" />
-		</p:submenu>
-
-		<p:submenu label="#{bundle['title.estudiante']}" 
-				   icon="ui-icon-document">
-			<p:menuitem value="Home" 
-						action="#{estudianteMBean.loadDashboard}" 
-						outcome="/faces/estudiante.xhtml" />
-		</p:submenu>
+		<f:facet name="left">
 		
-	</p:menubar>
+			<p:commandButton value="#{bundle['title.persona.fisica']}" 
+							 action="#{personaFisicaMBean.loadDashboard}" 
+							 outcome="/faces/persona-fisica.xhtml" />
+					 	
+			<p:commandButton value="#{bundle['title.estudiante']}" 
+							 action="#{estudianteMBean.loadDashboard}" 
+					 		 outcome="/faces/estudiante.xhtml" />
+		
+		</f:facet>
+		
+		<f:facet name="right">
+		
+			<p:commandButton value="Logout" 
+							 outcome="/faces/login.xhtml" />
+		
+		</f:facet>
+	
+	</p:toolbar>
+					 
 </h:form>
 
 </html>

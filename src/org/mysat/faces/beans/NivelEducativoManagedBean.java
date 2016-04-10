@@ -26,7 +26,7 @@ import org.primefaces.event.SelectEvent;
  * @author imac
  *
  */
-@ManagedBean(name = "deduccionMBean")
+@ManagedBean(name = "nivelEducativoMBean")
 @ApplicationScoped
 public class NivelEducativoManagedBean implements Serializable {
 	/**

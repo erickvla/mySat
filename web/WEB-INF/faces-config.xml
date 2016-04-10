@@ -6,9 +6,7 @@
 	version="2.0">
 	
 	<application>
-		<el-resolver>
-    		    org.springframework.web.jsf.el.SpringBeanFacesELResolver
-		</el-resolver>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 		<locale-config>
 			<default-locale>en_US</default-locale>
 		</locale-config>
@@ -40,19 +38,11 @@
 			<to-view-id>/faces/estudiante.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>ANY PAGE</display-name>
-		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/faces/login.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>ANY PAGE</display-name>
-		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-action>#{deduccionMBean.loadDashboard}</from-action>
 			<from-outcome>success</from-outcome>
@@ -77,6 +67,12 @@
 		<display-name>CurpValidator</display-name>
 		<validator-id>curpValidator</validator-id>
 		<validator-class>org.mysat.faces.validators.CurpValidator</validator-class>
+	</validator>
+	
+	<validator>
+		<display-name>DeduccionValidator</display-name>
+		<validator-id>deduccionValidator</validator-id>
+		<validator-class>org.mysat.faces.validators.DeduccionValidator</validator-class>
 	</validator>
 
 </faces-config>

@@ -54,7 +54,8 @@
 						<p:commandButton id="crearButton"  
 										 type="button" 
 										 onclick="PF('wCreateItemDialog').show();" 
-										 value="#{bundle['button.crear']}" />
+										 value="#{bundle['button.crear']}" 
+										 actionListener="#{deduccionMBean.clearFormListener}" />
 				
 						<p:commandButton id="eliminarButton" 
 										 type="button" 
@@ -86,7 +87,7 @@
 														  minimum="3"
 														  maximum="80" />
 										<f:validator for="editNombreInpTxt" 
-											 		 validatorId="nombreApellidoValidator" />
+											 		 validatorId="deduccionValidator" />
 									</p:inputText>
 								</f:facet>
 							</p:cellEditor>
@@ -147,13 +148,13 @@
 				<p:inputText id="nombreInputText" 
 							 label="#{bundle['label.nombre']}" 
 							 required="true" 
-							 size="80" 
+							 size="30" 
 							 value="#{deduccionMBean.properties.nombre}">
 					<f:validateLength for="nombreInputText"
 									  minimum="3"
 									  maximum="80" />
 					<f:validator for="nombreInputText" 
-								 validatorId="nombreApellidoValidator" />
+								 validatorId="deduccionValidator" />
 				</p:inputText>
 								
 								

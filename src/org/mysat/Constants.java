@@ -41,13 +41,13 @@ public class Constants {
 	public static final String NAMED_QUERY_ESTUDIANTE_FIND_BY_APELLIDO = "Estudiante.findByApellido";
 	public static final String NAMED_QUERY_ESTUDIANTE_FIND_BY_APELLIDO_LIKE = "Estudiante.findByApellidoLike";
 	
-	// NivelEscolar Entity
+	// NivelEducativo Entity
 	
-	public static final String NAMED_QUERY_NIVEL_ESCOLAR_FIND_ALL = "NivelEscolar.findAll";
-	public static final String NAMED_QUERY_NIVEL_ESCOLAR_FIND_BY_ID = "NivelEscolar.findById";
+	public static final String NAMED_QUERY_NIVEL_EDUCATVO_FIND_ALL = "NivelEducativo.findAll";
+	public static final String NAMED_QUERY_NIVEL_EDUCATVO_FIND_BY_ID = "NivelEducativo.findById";
 	
 	// EspecialidadMedica Entity
 	
-	public static final String NAMED_QUERY_ESPECIALIDAD_MEDICA_FIND_ALL = "EspecialidadMedica.findAll";
-	public static final String NAMED_QUERY_ESPECIALIDAD_MEDICA_FIND_BY_ID = "EspecialidadMedica.findById";
+	public static final String NAMED_QUERY_DEDUCCION_FIND_ALL = "Deduccion.findAll";
+	public static final String NAMED_QUERY_DEDUCCION_FIND_BY_ID = "Deduccion.findById";
 }

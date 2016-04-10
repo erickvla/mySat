@@ -9,7 +9,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 
-<div style="width: 100%; font-size: 36px; line-height: 48px; background-color: navy; color: white">
+<div style="width: 100%; font-size: 36px; line-height: 48px">
 
 	<h:outputText value="#{bundle['app.name']}" />
 
@@ -28,6 +28,10 @@
 			<p:commandButton value="#{bundle['title.estudiante']}" 
 							 action="#{estudianteMBean.loadDashboard}" 
 					 		 outcome="/faces/estudiante.xhtml" />
+					 		 
+			<p:commandButton value="#{bundle['title.deduccion']}" 
+							 action="#{deduccionMBean.loadDashboard}" 
+					 		 outcome="/faces/deduccion.xhtml" />
 		
 		</f:facet>
 		

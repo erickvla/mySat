@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14584185983800" configfile="/mysat/web/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="ANY PAGE" x="356" y="60" id="pf14596132500730" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14596132500731 pf14596132500732 pf14599155565900" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="ANY PAGE" x="356" y="60" id="pf14596132500730" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14596132500731 pf14596132500732 pf14599155565900 pf14602657322320" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="faces/persona-fisica.xhtml" x="96" y="264" id="pf14596132500733" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14596132500731" path="/faces/persona-fisica.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="faces/estudiante.xhtml" x="324" y="264" id="pf14596132500734" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf14596132500732" path="/faces/estudiante.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="faces/login.xhtml" x="576" y="264" id="pf14599155565901" inlinks="pf14599155565900" path="/faces/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="faces/login.xhtml" x="576" y="264" id="pf14599155565901" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf14599155565900" path="/faces/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="deduccion.xhtml" x="792" y="264" id="pf14602657322321" inlinks="pf14602657322320" path="/faces/deduccion.xhtml"/>
   <links id="pf14596132500731" target="pf14596132500733" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{personaFisicaMBean.loadDashboard}"/>
   <links id="pf14596132500732" target="pf14596132500734" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{estudianteMBean.loadDashboard}"/>
   <links id="pf14599155565900" target="pf14599155565901" source="pf14596132500730" outcome="logout" redirect="true"/>
+  <links id="pf14602657322320" target="pf14602657322321" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{deduccionMBean.loadDashboard}"/>
 </pageflow:Pageflow>

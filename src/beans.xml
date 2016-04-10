@@ -13,6 +13,12 @@
 	
 	<bean id="personaDao" 
 		  class="org.mysat.persistence.daos.PersonaDao" />
+		  
+	<bean id="deduccionDao" 
+		  class="org.mysat.persistence.daos.DeduccionDao" />
+		  
+	<bean id="nivelEducativoDao" 
+		  class="org.mysat.persistence.daos.NivelEducativoDao" />
 
 	<bean id="personaFisicaCtrl" 
 		  class="org.mysat.persistence.controllers.PersonaFisicaController">
@@ -28,6 +34,18 @@
 				  ref="estudianteDao" />
 		<property name="personaDao" 
 				  ref="personaDao" />
+	</bean>
+	
+	<bean id="deduccionCtrl" 
+		  class="org.mysat.persistence.controllers.DeduccionController">
+		<property name="deduccionDao" 
+				  ref="deduccionDao" />
+	</bean>
+	
+	<bean id="nivelEducativoCtrl" 
+		  class="org.mysat.persistence.controllers.NivelEducativoController">
+		<property name="nivelEducativoDao" 
+				  ref="nivelEducativoDao" />
 	</bean>
 
 </beans>

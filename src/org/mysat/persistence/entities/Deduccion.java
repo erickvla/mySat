@@ -3,6 +3,7 @@ package org.mysat.persistence.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.mysat.Constants;
 import org.mysat.persistence.entities.ifc.IdNombreInterface;
 
 import java.util.List;
@@ -13,7 +14,12 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Deduccion.findAll", query="SELECT d FROM Deduccion d")
+@NamedQueries({ 
+	@NamedQuery(name = Constants.NAMED_QUERY_DEDUCCION_FIND_ALL, 
+				query = "SELECT d FROM Deduccion d"),
+	@NamedQuery(name = Constants.NAMED_QUERY_DEDUCCION_FIND_BY_ID, 
+				query = "SELECT d FROM Deduccion d WHERE d.id = :id")
+})
 public class Deduccion implements Serializable, IdNombreInterface {
 
 	/**
@@ -78,6 +84,10 @@ public class Deduccion implements Serializable, IdNombreInterface {
 	public String toString() {
 		return "Deduccion [id=" + id + ", nombre=" + nombre + ", facturas="
 				+ facturas + "]";
+	}
+	
+	public String display() {
+		return "[ " + getNombre() + " ]";
 	}
 
 }

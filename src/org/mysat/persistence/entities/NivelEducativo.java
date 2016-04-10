@@ -3,6 +3,7 @@ package org.mysat.persistence.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.mysat.Constants;
 import org.mysat.persistence.entities.ifc.IdNombreInterface;
 
 import java.math.BigDecimal;
@@ -15,7 +16,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="NIVEL_EDUCATIVO")
-@NamedQuery(name="NivelEducativo.findAll", query="SELECT n FROM NivelEducativo n")
+@NamedQueries({ 
+	@NamedQuery(name = Constants.NAMED_QUERY_NIVEL_EDUCATVO_FIND_ALL, 
+				query = "SELECT ne FROM NivelEducativo ne"),
+	@NamedQuery(name = Constants.NAMED_QUERY_NIVEL_EDUCATVO_FIND_BY_ID, 
+				query = "SELECT ne FROM NivelEducativo ne WHERE ne.id = :id")
+})
 public class NivelEducativo implements Serializable, IdNombreInterface {
 
 	/**
@@ -45,24 +51,24 @@ public class NivelEducativo implements Serializable, IdNombreInterface {
 		return this.id;
 	}
 
-	public void setId(long nivelEducativoId) {
-		this.id = nivelEducativoId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
 		return this.nombre;
 	}
 
-	public void setNombre(String nivelEducativoNombre) {
-		this.nombre = nivelEducativoNombre;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public BigDecimal getTope() {
 		return this.tope;
 	}
 
-	public void setTope(BigDecimal nivelEducativoTope) {
-		this.tope = nivelEducativoTope;
+	public void setTope(BigDecimal tope) {
+		this.tope = tope;
 	}
 
 	public List<Factura> getFacturas() {
@@ -91,6 +97,10 @@ public class NivelEducativo implements Serializable, IdNombreInterface {
 	public String toString() {
 		return "NivelEducativo [id=" + id + ", nombre=" + nombre
 				+ ", tope=" + tope + ", facturas=" + facturas + "]";
+	}
+	
+	public String display() {
+		return "[ " + getNombre() + " " + getTope() + " ]";
 	}
 
 }

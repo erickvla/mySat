@@ -50,6 +50,16 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>ANY PAGE</display-name>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{deduccionMBean.loadDashboard}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/faces/deduccion.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 	
 	<validator>
 		<display-name>RfcValidator</display-name>

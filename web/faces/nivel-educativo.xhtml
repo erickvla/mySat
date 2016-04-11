@@ -28,27 +28,27 @@
 			<p></p>
 			
 			<p:dataTable id="itemsDataTable" 
-						 value="#{estudianteMBean.results.resultsList}" 
-						 var="est" 
+						 value="#{nivelEducativoMBean.results.resultsList}" 
+						 var="niv" 
 						 rowExpandMode="single" 
-						 rowKey="#{est.id}" 
-						 selection="#{estudianteMBean.selectedItems}" 
+						 rowKey="#{niv.id}" 
+						 selection="#{nivelEducativoMBean.selectedItems}" 
 						 editable="true">
 						 
 				<p:ajax event="rowEdit"
-						listener="#{estudianteMBean.updateItemListener}"
+						listener="#{nivelEducativoMBean.updateItemListener}"
 						update="frmMySat:messages" />
 	
 				<p:ajax event="rowEditCancel"
-						listener="#{estudianteMBean.rowCancelListener}" />
+						listener="#{nivelEducativoMBean.rowCancelListener}" />
 						
 				<p:ajax event="rowSelect"
-						listener="#{estudianteMBean.rowSelectListener}" />
+						listener="#{nivelEducativoMBean.rowSelectListener}" />
 		
 					<f:facet name="header">
 					
 						<h4>
-							<h:outputText value="#{bundle['title.estudiante']}" />
+							<h:outputText value="#{bundle['title.nivel.educativo']}" />
 						</h4>
 						
 						<p:commandButton id="crearButton"  
@@ -68,79 +68,54 @@
 							  width="40" />
 			
 						<p:column headerText="#{bundle['column.nombre']}" 
-								  sortBy="#{est.persona.nombre}" 
-								  filterBy="#{est.persona.nombre}" 
+								  sortBy="#{niv.nombre}" 
+								  filterBy="#{niv.nombre}" 
 								  filterMatchMode="contains">
 			
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{est.persona.nombre}" />
+									<h:outputText value="#{niv.nombre}" />
 								</f:facet>
 								<f:facet name="input">
 									<p:inputText id="editNombreInpTxt" 
-												 value="#{est.persona.nombre}" 
-												 label="Nombre" 
+												 value="#{niv.nombre}" 
+												 label="#{bundle['label.nombre']}" 
 										 		 required="true" 
 										 		 size="30">
 										<f:validateLength for="editNombreInpTxt"
 														  minimum="3"
 														  maximum="30" />
 										<f:validator for="editNombreInpTxt" 
-											 		 validatorId="nombreApellidoValidator" />
+											 		 validatorId="nivelEducativoValidator" />
 									</p:inputText>
 								</f:facet>
 							</p:cellEditor>
 			
 						</p:column>
 			
-						<p:column headerText="#{bundle['column.apellido']}" 
-								  sortBy="#{est.persona.apellido}" 
-								  filterBy="#{est.persona.apellido}" 
+						<p:column headerText="#{bundle['column.tope']}" 
+								  sortBy="#{niv.tope}" 
+								  filterBy="#{niv.tope}" 
 								  filterMatchMode="contains">
 			
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{est.persona.apellido}" />
+									<h:outputText value="#{niv.tope}">
+										<f:convertNumber pattern="$ ###,###.00" />
+									</h:outputText>
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText id="editApellidoInpTxt"
-												 value="#{est.persona.apellido}" 
-												 label="Apellido" 
+									<p:inputText id="editTopeInpTxt"
+												 value="#{niv.tope}" 
+												 label="#{bundle['label.tope']}" 
 										 		 required="true" 
-										 		 size="30">
-										<f:validateLength for="editApellidoInpTxt"
+										 		 size="10">
+										<f:validateLength for="editTopeInpTxt"
 														  minimum="3"
-														  maximum="30" />
-										<f:validator for="editApellidoInpTxt" 
-											 		 validatorId="nombreApellidoValidator" />
-									</p:inputText>
-								</f:facet>
-							</p:cellEditor>
-			
-						</p:column>
-			
-						<p:column headerText="#{bundle['column.curp']}" 
-								  sortBy="#{est.curp}" 
-								  filterBy="#{est.curp}" 
-								  filterMatchMode="contains">
-			
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{est.curp}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:inputText id="editCurpInpTxt" 
-												 value="#{est.curp}" 
-												 label="CURP" 
-										 		 required="true" 
-										 		 size="20" 
-										 		 style="text-transform: uppercase"
-										 		 converter="uppercaseConverter">
-										<f:validateLength for="editCurpInpTxt"
-														  minimum="18"
-														  maximum="18" />
-										<f:validator for="editCurpInpTxt" 
-											 		 validatorId="curpValidator" />
+														  maximum="10" />
+										<f:validateDoubleRange for="editTopeInpTxt"
+										   					   minimum="1000"
+										   					   maximum="15000" />
 									</p:inputText>
 								</f:facet>
 							</p:cellEditor>
@@ -149,7 +124,9 @@
 						
 						<p:column width="55">
 				
-							<p:rowEditor />
+							<p:rowEditor editTitle="#{bundle['button.editar']}" 
+										 saveTitle="#{bundle['button.guardar']}" 
+										 cancelTitle="#{bundle['button.cancelar']}" />
 			
 						</p:column>
 						
@@ -158,10 +135,10 @@
 							<p:commandButton id="viewItemCmdBtn" 
 											 icon="fa fa-fw fa-search" 
 											 type="button" 
-											 title="Ver Detalles">
+											 title="#{bundle['button.ver']}">
 											 
 								<p:ajax event="click" 
-										listener="#{estudianteMBean.viewItemListener(est)}"
+										listener="#{nivelEducativoMBean.viewItemListener(niv)}"
 										oncomplete="PF('wViewItemDlg').show()" 
 										update=":frmMySat:viewItemDlg:viewItemOutPnl" />
 								
@@ -171,7 +148,7 @@
 			
 						<f:facet name="footer">
 						
-							<h:outputText value="Total de registros [#{fn:length(estudianteMBean.results.resultsList)}]" />
+							<h:outputText value="Total de registros [#{fn:length(nivelEducativoMBean.results.resultsList)}]" />
 					
 						</f:facet>
 					
@@ -180,65 +157,24 @@
 			<mysat:viewDialog id="viewItemDlg">
 					  
 				<p:panelGrid id="viewItemPnlGrd"
-							 columns="3"
+							 columns="2"
 							 layout="grid"
 							 style="margin: 30px">
 							 
 					<h:outputText value="#{bundle['label.nombre']}" />
 					
-					<h:outputText value="#{bundle['label.apellido']}" />
+					<h:outputText value="#{bundle['label.tope']}" />
 					
-					<h:outputText value="#{bundle['label.curp']}" />
+					<h:outputText value="#{nivelEducativoMBean.selected.nombre}" />
 					
-					<h:outputText value="#{estudianteMBean.selected.persona.nombre}" />
-					
-					<h:outputText value="#{estudianteMBean.selected.persona.apellido}" />
-					
-					<h:outputText value="#{estudianteMBean.selected.curp}" />
+					<h:outputText value="#{nivelEducativoMBean.selected.tope}" />
 				
 				</p:panelGrid>
-				
-				<p:dataTable id="viewItemDatTbl" 
-							 value="#{estudianteMBean.selected.personaFisicas}" 
-							 var="pf" 
-							 rowKey="#{pf.id}" 
-							 style="margin: 30px">
-							 
-					<f:facet name="header">
-						
-						<h4>
-							<h:outputText value="#{bundle['title.persona.fisica']}" />
-						</h4>
-						
-					</f:facet>
-
-					<p:column headerText="#{bundle['column.nombre']}"
-							  sortBy="#{pf.persona.nombre}">
-
-						<h:outputText value="#{pf.persona.nombre}" />
-
-					</p:column>
-
-					<p:column headerText="#{bundle['column.apellido']}"
-							  sortBy="#{pf.persona.apellido}">
-
-						<h:outputText value="#{pf.persona.apellido}" />
-
-					</p:column>
-
-					<p:column  headerText="#{bundle['column.rfc']}"
-							  sortBy="#{pf.rfc}">
-
-						<h:outputText value="#{pf.rfc}" />
-
-					</p:column>
-
-				</p:dataTable>
 				
 			</mysat:viewDialog>
 			
 			<mysat:insertDialog id="createItemDialog" 
-								ajaxActionListener="#{estudianteMBean.insertItemListener}">
+								ajaxActionListener="#{nivelEducativoMBean.insertItemListener}">
 								
 				<p:outputLabel for="nombreInputText" 
 							   value="#{bundle['label.nombre']}" />
@@ -246,52 +182,36 @@
 				<p:inputText id="nombreInputText" 
 							 label="#{bundle['label.nombre']}" 
 							 required="true" 
-							 size="30" 
-							 value="#{estudianteMBean.properties.persona.nombre}">
+							 size="20" 
+							 value="#{nivelEducativoMBean.properties.nombre}">
 					<f:validateLength for="nombreInputText"
 									  minimum="3"
-									  maximum="30" />
+									  maximum="20" />
 					<f:validator for="nombreInputText" 
-								 validatorId="nombreApellidoValidator" />
+								 validatorId="nivelEducativoValidator" />
 				</p:inputText>
 
-				<p:outputLabel for="apellidoInputText"
-							   value="#{bundle['label.apellido']}" />
+				<p:outputLabel for="topeInputText"
+							   value="#{bundle['label.tope']}" />
 
-				<p:inputText id="apellidoInputText" 
-							 label="#{bundle['label.apellido']}" 
+				<p:inputText id="topeInputText" 
+							 label="#{bundle['label.tope']}" 
 							 required="true" 
-							 size="30" 
-							 value="#{estudianteMBean.properties.persona.apellido}">
-					<f:validateLength for="apellidoInputText"
+							 size="10" 
+							 value="#{nivelEducativoMBean.properties.tope}">
+					<f:validateLength for="topeInputText"
 									  minimum="3"
-									  maximum="30" />
-					<f:validator for="apellidoInputText" 
-								 validatorId="nombreApellidoValidator" />
-				</p:inputText>
-
-				<p:outputLabel for="curpInputText"
-							   value="#{bundle['label.curp']}" />
-
-				<p:inputText id="curpInputText" 
-							 label="#{bundle['label.curp']}" 
-							 required="true" 
-							 size="20" 
-							 value="#{estudianteMBean.properties.curp}"
-							 style="text-transform: uppercase"
-							 converter="uppercaseConverter">
-					<f:validateLength for="curpInputText"
-									  minimum="18"
-									  maximum="18" />
-					<f:validator for="curpInputText" 
-								 validatorId="curpValidator" />
+									  maximum="10" />
+					<f:validateDoubleRange for="topeInputText"
+										   minimum="1000"
+										   maximum="15000" />
 				</p:inputText>
 								
 								
 			</mysat:insertDialog>
 			
 			<mysat:deleteConfirmDialog id="eliminarConfirmDialog" 
-									   ajaxEventListener="#{estudianteMBean.deleteItemsListener}" />
+									   ajaxEventListener="#{nivelEducativoMBean.deleteItemsListener}" />
 	
 		</h:form>
 	

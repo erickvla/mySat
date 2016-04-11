@@ -54,8 +54,7 @@
 						<p:commandButton id="crearButton"  
 										 type="button" 
 										 onclick="PF('wCreateItemDialog').show();" 
-										 value="#{bundle['button.crear']}" 
-										 actionListener="#{deduccionMBean.clearFormListener}" />
+										 value="#{bundle['button.crear']}" />
 				
 						<p:commandButton id="eliminarButton" 
 										 type="button" 
@@ -80,7 +79,7 @@
 								<f:facet name="input">
 									<p:inputText id="editNombreInpTxt" 
 												 value="#{ded.nombre}" 
-												 label="Nombre" 
+												 label="#{bundle['label.nombre']}" 
 										 		 required="true" 
 										 		 size="80">
 										<f:validateLength for="editNombreInpTxt"
@@ -96,7 +95,9 @@
 						
 						<p:column width="55">
 				
-							<p:rowEditor />
+							<p:rowEditor editTitle="#{bundle['button.editar']}" 
+										 saveTitle="#{bundle['button.guardar']}" 
+										 cancelTitle="#{bundle['button.cancelar']}" />
 			
 						</p:column>
 						
@@ -105,7 +106,7 @@
 							<p:commandButton id="viewItemCmdBtn" 
 											 icon="fa fa-fw fa-search" 
 											 type="button" 
-											 title="Ver Detalles">
+											 title="#{bundle['button.ver']}">
 											 
 								<p:ajax event="click" 
 										listener="#{deduccionMBean.viewItemListener(ded)}"
@@ -156,7 +157,6 @@
 					<f:validator for="nombreInputText" 
 								 validatorId="deduccionValidator" />
 				</p:inputText>
-								
 								
 			</mysat:insertDialog>
 			

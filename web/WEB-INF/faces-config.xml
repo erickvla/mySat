@@ -49,6 +49,12 @@
 			<to-view-id>/faces/deduccion.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		<navigation-case>
+			<from-action>#{nivelEducativoMBean.loadDashboard}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/faces/nivel-educativo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
 	
 	<validator>
@@ -73,6 +79,12 @@
 		<display-name>DeduccionValidator</display-name>
 		<validator-id>deduccionValidator</validator-id>
 		<validator-class>org.mysat.faces.validators.DeduccionValidator</validator-class>
+	</validator>
+	
+	<validator>
+		<display-name>NivelEducativoValidator</display-name>
+		<validator-id>nivelEducativoValidator</validator-id>
+		<validator-class>org.mysat.faces.validators.NivelEducativoValidator</validator-class>
 	</validator>
 
 </faces-config>

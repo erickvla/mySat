@@ -79,7 +79,7 @@
 								<f:facet name="input">
 									<p:inputText id="editNombreInpTxt" 
 												 value="#{est.persona.nombre}" 
-												 label="Nombre" 
+												 label="#{bundle['label.nombre']}" 
 										 		 required="true" 
 										 		 size="30">
 										<f:validateLength for="editNombreInpTxt"
@@ -105,7 +105,7 @@
 								<f:facet name="input">
 									<p:inputText id="editApellidoInpTxt"
 												 value="#{est.persona.apellido}" 
-												 label="Apellido" 
+												 label="#{bundle['label.apellido']}" 
 										 		 required="true" 
 										 		 size="30">
 										<f:validateLength for="editApellidoInpTxt"
@@ -131,7 +131,7 @@
 								<f:facet name="input">
 									<p:inputText id="editCurpInpTxt" 
 												 value="#{est.curp}" 
-												 label="CURP" 
+												 label="#{bundle['label.curp']}" 
 										 		 required="true" 
 										 		 size="20" 
 										 		 style="text-transform: uppercase"
@@ -149,7 +149,9 @@
 						
 						<p:column width="55">
 				
-							<p:rowEditor />
+							<p:rowEditor editTitle="#{bundle['button.editar']}" 
+										 saveTitle="#{bundle['button.guardar']}" 
+										 cancelTitle="#{bundle['button.cancelar']}" />
 			
 						</p:column>
 						
@@ -158,7 +160,7 @@
 							<p:commandButton id="viewItemCmdBtn" 
 											 icon="fa fa-fw fa-search" 
 											 type="button" 
-											 title="Ver Detalles">
+											 title="#{bundle['button.ver']}">
 											 
 								<p:ajax event="click" 
 										listener="#{estudianteMBean.viewItemListener(est)}"

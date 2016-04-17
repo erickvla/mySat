@@ -56,6 +56,16 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<display-name>ANY PAGE</display-name>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-action>#{beneficiarioMBean.loadDashboard}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/faces/beneficiario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 	
 	<validator>
 		<display-name>RfcValidator</display-name>
@@ -85,6 +95,12 @@
 		<display-name>NivelEducativoValidator</display-name>
 		<validator-id>nivelEducativoValidator</validator-id>
 		<validator-class>org.mysat.faces.validators.NivelEducativoValidator</validator-class>
+	</validator>
+	
+	<validator>
+		<display-name>RfcMoralValidator</display-name>
+		<validator-id>rfcMoralValidator</validator-id>
+		<validator-class>org.mysat.faces.validators.RfcMoralValidator</validator-class>
 	</validator>
 
 </faces-config>

@@ -79,5 +79,9 @@ public class Beneficiario implements Serializable, IdNombreInterface {
 		return "Beneficiario [id=" + id + ", nombre=" + nombre
 				+ ", facturas=" + facturas + "]";
 	}
+	
+	public String display() {
+		return "[ " + getNombre() + " ]";
+	}
 
 }

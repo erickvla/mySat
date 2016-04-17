@@ -19,6 +19,9 @@
 		  
 	<bean id="nivelEducativoDao" 
 		  class="org.mysat.persistence.daos.NivelEducativoDao" />
+		  
+	<bean id="beneficiarioDao" 
+		  class="org.mysat.persistence.daos.BeneficiarioDao" />
 
 	<bean id="personaFisicaCtrl" 
 		  class="org.mysat.persistence.controllers.PersonaFisicaController">
@@ -46,6 +49,12 @@
 		  class="org.mysat.persistence.controllers.NivelEducativoController">
 		<property name="nivelEducativoDao" 
 				  ref="nivelEducativoDao" />
+	</bean>
+	
+	<bean id="beneficiarioCtrl" 
+		  class="org.mysat.persistence.controllers.BeneficiarioController">
+		<property name="beneficiarioDao" 
+				  ref="beneficiarioDao" />
 	</bean>
 
 </beans>

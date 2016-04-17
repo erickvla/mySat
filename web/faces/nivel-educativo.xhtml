@@ -14,6 +14,10 @@
 	<ui:define name="header">
 		  <ui:include src="templates/header.xhtml" />
 	</ui:define>
+	
+	<ui:define name="leftnav">
+		  <ui:include src="templates/leftnav.xhtml" />
+	</ui:define>
 
     <ui:define name="content">	
 
@@ -129,22 +133,6 @@
 										 cancelTitle="#{bundle['button.cancelar']}" />
 			
 						</p:column>
-						
-						<p:column width="55">
-						
-							<p:commandButton id="viewItemCmdBtn" 
-											 icon="fa fa-fw fa-search" 
-											 type="button" 
-											 title="#{bundle['button.ver']}">
-											 
-								<p:ajax event="click" 
-										listener="#{nivelEducativoMBean.viewItemListener(niv)}"
-										oncomplete="PF('wViewItemDlg').show()" 
-										update=":frmMySat:viewItemDlg:viewItemOutPnl" />
-								
-							</p:commandButton>
-			
-						</p:column>
 			
 						<f:facet name="footer">
 						
@@ -153,25 +141,6 @@
 						</f:facet>
 					
 			</p:dataTable>
-			
-			<mysat:viewDialog id="viewItemDlg">
-					  
-				<p:panelGrid id="viewItemPnlGrd"
-							 columns="2"
-							 layout="grid"
-							 style="margin: 30px">
-							 
-					<h:outputText value="#{bundle['label.nombre']}" />
-					
-					<h:outputText value="#{bundle['label.tope']}" />
-					
-					<h:outputText value="#{nivelEducativoMBean.selected.nombre}" />
-					
-					<h:outputText value="#{nivelEducativoMBean.selected.tope}" />
-				
-				</p:panelGrid>
-				
-			</mysat:viewDialog>
 			
 			<mysat:insertDialog id="createItemDialog" 
 								ajaxActionListener="#{nivelEducativoMBean.insertItemListener}">

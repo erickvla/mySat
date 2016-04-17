@@ -21,21 +21,19 @@
 
 	<ui:debug hotkey="z"
 			  rendered="#{initParam['javax.faces.PROJECT_STAGE'] ne 'Production'}" />
-
+			  
 	<div id="header">
+					  
 		<ui:insert name="header">
 	    	Header area.  See comments below this line in the source.
 	    	<!--  include your header file or uncomment the include below and create header.xhtml in this directory -->
 			<!-- <ui:include src="header.xhtml"/> -->
 		</ui:insert>
+		
 	</div>
-
-
+			  
 	<div id="content" class="container">
-
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-
+		
 		<ui:insert name="content">
 		   	Content area.  See comments below this line in the source.
 		   	<!--  include your content file or uncomment the include below and create content.xhtml in this directory -->
@@ -43,18 +41,17 @@
 			<!-- <ui:include src="content.xhtml"/> -->
 			<!-- </div> -->
 		</ui:insert>
-
-		<p>&nbsp;</p>
-		<p>&nbsp;</p>
-
+		
 	</div>
-
+		
 	<div id="footer">
+		
 		<ui:insert name="footer">
-	    	Footer area.  See comments below this line in the source.
-	    	<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
+    		Footer area.  See comments below this line in the source.
+    		<!--  include your header file or uncomment the include below and create footer.xhtml in this directory -->
 			<!--<ui:include src="footer.xhtml"/>  -->
 		</ui:insert>
+	
 	</div>
 
 </h:body>

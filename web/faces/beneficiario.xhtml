@@ -32,27 +32,27 @@
 			<p></p>
 			
 			<p:dataTable id="itemsDataTable" 
-						 value="#{deduccionMBean.results.resultsList}" 
+						 value="#{beneficiarioMBean.results.resultsList}" 
 						 var="ded" 
 						 rowExpandMode="single" 
 						 rowKey="#{ded.id}" 
-						 selection="#{deduccionMBean.selectedItems}" 
+						 selection="#{beneficiarioMBean.selectedItems}" 
 						 editable="true">
 						 
 				<p:ajax event="rowEdit"
-						listener="#{deduccionMBean.updateItemListener}"
+						listener="#{beneficiarioMBean.updateItemListener}"
 						update="frmMySat:messages" />
 	
 				<p:ajax event="rowEditCancel"
-						listener="#{deduccionMBean.rowCancelListener}" />
+						listener="#{beneficiarioMBean.rowCancelListener}" />
 						
 				<p:ajax event="rowSelect"
-						listener="#{deduccionMBean.rowSelectListener}" />
+						listener="#{beneficiarioMBean.rowSelectListener}" />
 		
 					<f:facet name="header">
 					
 						<h4>
-							<h:outputText value="#{bundle['title.deduccion']}" />
+							<h:outputText value="#{bundle['title.beneficiario']}" />
 						</h4>
 						
 						<p:commandButton id="crearButton"  
@@ -85,10 +85,10 @@
 												 value="#{ded.nombre}" 
 												 label="#{bundle['label.nombre']}" 
 										 		 required="true" 
-										 		 size="80">
+										 		 size="40">
 										<f:validateLength for="editNombreInpTxt"
 														  minimum="3"
-														  maximum="80" />
+														  maximum="40" />
 										<f:validator for="editNombreInpTxt" 
 											 		 validatorId="deduccionValidator" />
 									</p:inputText>
@@ -107,14 +107,14 @@
 			
 						<f:facet name="footer">
 						
-							<h:outputText value="Total de registros [#{fn:length(deduccionMBean.results.resultsList)}]" />
+							<h:outputText value="Total de registros [#{fn:length(beneficiarioMBean.results.resultsList)}]" />
 					
 						</f:facet>
 					
 			</p:dataTable>
 			
 			<mysat:insertDialog id="createItemDialog" 
-								ajaxActionListener="#{deduccionMBean.insertItemListener}">
+								ajaxActionListener="#{beneficiarioMBean.insertItemListener}">
 								
 				<p:outputLabel for="nombreInputText" 
 							   value="#{bundle['label.nombre']}" />
@@ -123,10 +123,10 @@
 							 label="#{bundle['label.nombre']}" 
 							 required="true" 
 							 size="30" 
-							 value="#{deduccionMBean.properties.nombre}">
+							 value="#{beneficiarioMBean.properties.nombre}">
 					<f:validateLength for="nombreInputText"
 									  minimum="3"
-									  maximum="80" />
+									  maximum="40" />
 					<f:validator for="nombreInputText" 
 								 validatorId="deduccionValidator" />
 				</p:inputText>
@@ -134,7 +134,7 @@
 			</mysat:insertDialog>
 			
 			<mysat:deleteConfirmDialog id="eliminarConfirmDialog" 
-									   ajaxEventListener="#{deduccionMBean.deleteItemsListener}" />
+									   ajaxEventListener="#{beneficiarioMBean.deleteItemsListener}" />
 	
 		</h:form>
 	

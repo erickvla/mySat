@@ -37,7 +37,8 @@
 						 rowExpandMode="single" 
 						 rowKey="#{ded.id}" 
 						 selection="#{deduccionMBean.selectedItems}" 
-						 editable="true">
+						 editable="true"
+						 emptyMessage="#{bundle['message.datatable.empty']}">
 						 
 				<p:ajax event="rowEdit"
 						listener="#{deduccionMBean.updateItemListener}"

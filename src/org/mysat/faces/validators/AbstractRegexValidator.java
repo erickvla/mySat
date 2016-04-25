@@ -16,7 +16,7 @@ import org.primefaces.component.inputtext.InputText;
 public abstract class AbstractRegexValidator implements Validator {
 	private static final Logger LOG = Logger.getLogger(AbstractRegexValidator.class);
 	protected String resourceBundleKey;
-	private final String ERROR_MESSAGE_REGEX = "error.message.regex";
+	private final String MESSAGE_ERROR_REGEX = "message.error.regex";
 
 	@Override
 	public void validate(FacesContext facesContext, UIComponent component, Object value) throws ValidatorException {
@@ -36,9 +36,9 @@ public abstract class AbstractRegexValidator implements Validator {
 					inputText = (InputText)component;
 					sb = new StringBuffer(inputText.getLabel());
 					
-					if (ResourceBundleUtils.contains(ERROR_MESSAGE_REGEX)) {
+					if (ResourceBundleUtils.contains(MESSAGE_ERROR_REGEX)) {
 						sb.append(": ");
-						sb.append(ResourceBundleUtils.getValue(ERROR_MESSAGE_REGEX));
+						sb.append(ResourceBundleUtils.getValue(MESSAGE_ERROR_REGEX));
 					}
 					
 					message = new FacesMessage(FacesMessage.SEVERITY_ERROR, sb.toString(), sb.toString());

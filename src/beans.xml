@@ -10,6 +10,9 @@
 	
 	<bean id="personaFisicaDao" 
 		  class="org.mysat.persistence.daos.PersonaFisicaDao" />
+		  
+	<bean id="personaMoralDao" 
+		  class="org.mysat.persistence.daos.PersonaMoralDao" />
 	
 	<bean id="personaDao" 
 		  class="org.mysat.persistence.daos.PersonaDao" />
@@ -29,6 +32,12 @@
 				  ref="personaFisicaDao" />
 		<property name="personaDao" 
 				  ref="personaDao" />
+	</bean>
+	
+	<bean id="personaMoralCtrl" 
+		  class="org.mysat.persistence.controllers.PersonaMoralController">
+		<property name="personaMoralDao" 
+				  ref="personaMoralDao" />
 	</bean>
 	
 	<bean id="estudianteCtrl" 

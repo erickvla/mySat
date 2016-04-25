@@ -29,6 +29,10 @@
 							 action="#{estudianteMBean.loadDashboard}" 
 					 		 outcome="/faces/estudiante.xhtml" />
 					 		 
+			<p:commandButton value="#{bundle['title.persona.moral']}" 
+							 action="#{personaMoralMBean.loadDashboard}" 
+							 outcome="/faces/persona-moral.xhtml" />
+					 		 
 			<p:commandButton value="#{bundle['title.deduccion']}" 
 							 action="#{deduccionMBean.loadDashboard}" 
 					 		 outcome="/faces/deduccion.xhtml" />

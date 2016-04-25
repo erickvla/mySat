@@ -3,8 +3,6 @@
  */
 package org.mysat.faces.validators;
 
-import java.util.regex.Pattern;
-
 /**
  * @author sian
  *

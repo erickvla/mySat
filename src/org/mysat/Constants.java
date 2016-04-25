@@ -56,4 +56,13 @@ public class Constants {
 	public static final String NAMED_QUERY_BENEFICIARIO_FIND_ALL = "Beneficiario.findAll";
 	public static final String NAMED_QUERY_BENEFICIARIO_FIND_BY_ID = "Beneficiario.findById";
 	
+	// PersonaMoral Entity
+	
+	public static final String NAMED_QUERY_PERSONA_MORAL_FIND_ALL = "PersonaMoral.findAll";
+	public static final String NAMED_QUERY_PERSONA_MORAL_FIND_BY_ID = "PersonaMoral.findById";
+	public static final String NAMED_QUERY_PERSONA_MORAL_FIND_BY_RFC = "PersonaMoral.findByRfc";
+	public static final String NAMED_QUERY_PERSONA_MORAL_FIND_BY_RFC_LIKE = "PersonaMoral.findByRfcLike";
+	public static final String NAMED_QUERY_PERSONA_MORAL_FIND_BY_NOMBRE = "PersonaMoral.findByNombre";
+	public static final String NAMED_QUERY_PERSONA_MORAL_FIND_BY_NOMBRE_LIKE = "PersonaMoral.findByNombreLike";
+	
 }

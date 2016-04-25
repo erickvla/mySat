@@ -37,7 +37,8 @@
 						 rowExpandMode="single" 
 						 rowKey="#{est.id}" 
 						 selection="#{estudianteMBean.selectedItems}" 
-						 editable="true">
+						 editable="true"
+						 emptyMessage="#{bundle['message.datatable.empty']}">
 						 
 				<p:ajax event="rowEdit"
 						listener="#{estudianteMBean.updateItemListener}"
@@ -208,7 +209,8 @@
 							 value="#{estudianteMBean.selected.personaFisicas}" 
 							 var="pf" 
 							 rowKey="#{pf.id}" 
-							 style="margin: 30px">
+							 style="margin: 30px" 
+							 emptyMessage="#{bundle['message.datatable.empty']}">
 							 
 					<f:facet name="header">
 						

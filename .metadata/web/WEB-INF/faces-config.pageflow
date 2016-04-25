@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14584185983800" configfile="/mysat/web/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="ANY PAGE" x="696" y="48" id="pf14596132500730" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14596132500731 pf14596132500732 pf14599155565900 pf14602657322320 pf14603327281382 pf14608124613611" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="ANY PAGE" x="696" y="48" id="pf14596132500730" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14596132500731 pf14596132500732 pf14599155565900 pf14602657322320 pf14603327281382 pf14609397928362 pf14609397928363" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="faces/persona-fisica.xhtml" x="96" y="264" id="pf14596132500733" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14596132500731" path="/faces/persona-fisica.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="faces/estudiante.xhtml" x="324" y="264" id="pf14596132500734" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf14596132500732" path="/faces/estudiante.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="faces/login.xhtml" x="576" y="264" id="pf14599155565901" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf14599155565900" path="/faces/login.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="deduccion.xhtml" x="792" y="264" id="pf14602657322321" referenceLink="//@navigationRule.0/@navigationCase.3/@toViewId|" inlinks="pf14602657322320" path="/faces/deduccion.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="nivel-educativo.xhtml" x="984" y="264" id="pf14603327281383" referenceLink="//@navigationRule.0/@navigationCase.4/@toViewId|" inlinks="pf14603327281382" path="/faces/nivel-educativo.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="beneficiario.xhtml" x="1236" y="264" id="pf14608124242240" inlinks="pf14608124613611" path="/faces/beneficiario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="faces/beneficiario.xhtml" id="pf14609397928374" referenceLink="//@navigationRule.0/@navigationCase.5/@toViewId|" inlinks="pf14609397928362" path="/faces/beneficiario.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="faces/persona-moral.xhtml" id="pf14609397928375" referenceLink="//@navigationRule.0/@navigationCase.6/@toViewId|" inlinks="pf14609397928363" path="/faces/persona-moral.xhtml"/>
   <links id="pf14596132500731" target="pf14596132500733" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{personaFisicaMBean.loadDashboard}"/>
   <links id="pf14596132500732" target="pf14596132500734" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{estudianteMBean.loadDashboard}"/>
   <links id="pf14599155565900" target="pf14599155565901" source="pf14596132500730" outcome="logout" redirect="true"/>
   <links id="pf14602657322320" target="pf14602657322321" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{deduccionMBean.loadDashboard}"/>
   <links id="pf14603327281382" target="pf14603327281383" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{nivelEducativoMBean.loadDashboard}"/>
-  <links id="pf14608124613611" target="pf14608124242240" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{beneficiarioMBean.loadDashboard}"/>
+  <links id="pf14609397928362" target="pf14609397928374" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{beneficiarioMBean.loadDashboard}"/>
+  <links id="pf14609397928363" target="pf14609397928375" source="pf14596132500730" outcome="success" redirect="true" fromaction="#{personaMoralMBean.loadDashboard}"/>
 </pageflow:Pageflow>

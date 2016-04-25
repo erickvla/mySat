@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.mysat.Constants;
 import org.mysat.persistence.entities.ifc.IdNombreInterface;
 import org.mysat.persistence.entities.ifc.RfcInterface;
 
@@ -20,7 +22,20 @@ import org.mysat.persistence.entities.ifc.RfcInterface;
  */
 @Entity
 @Table(name="PERSONA_MORAL")
-@NamedQuery(name="PersonaMoral.findAll", query="SELECT p FROM PersonaMoral p")
+@NamedQueries({ 
+	@NamedQuery(name = Constants.NAMED_QUERY_PERSONA_MORAL_FIND_ALL, 
+				query = "SELECT pm FROM PersonaMoral pm"),
+	@NamedQuery(name = Constants.NAMED_QUERY_PERSONA_MORAL_FIND_BY_ID, 
+				query = "SELECT pm FROM PersonaMoral pm WHERE pm.id = :id"),
+	@NamedQuery(name = Constants.NAMED_QUERY_PERSONA_MORAL_FIND_BY_RFC, 
+				query = "SELECT pm FROM PersonaMoral pm WHERE pm.rfc = :rfc"),
+	@NamedQuery(name = Constants.NAMED_QUERY_PERSONA_MORAL_FIND_BY_RFC_LIKE, 
+				query = "SELECT pm FROM PersonaMoral pm WHERE pm.rfc LIKE :rfc"), 
+	@NamedQuery(name = Constants.NAMED_QUERY_PERSONA_MORAL_FIND_BY_NOMBRE, 
+				query = "SELECT pm FROM PersonaMoral pm WHERE pm.nombre = :nombre"),
+	@NamedQuery(name = Constants.NAMED_QUERY_PERSONA_MORAL_FIND_BY_NOMBRE_LIKE, 
+				query = "SELECT pm FROM PersonaMoral pm WHERE pm.nombre LIKE :nombre")
+})
 public class PersonaMoral implements Serializable, IdNombreInterface, RfcInterface {
 
 	/**
@@ -69,6 +84,10 @@ public class PersonaMoral implements Serializable, IdNombreInterface, RfcInterfa
 	@Override
 	public String toString() {
 		return "PersonaMoral [id=" + id + ", nombre=" + nombre + ", rfc=" + rfc + "]";
+	}
+	
+	public String display() {
+		return "[ " + nombre + " , " + rfc + " ]";
 	}
 
 }

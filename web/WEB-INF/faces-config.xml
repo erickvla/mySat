@@ -55,14 +55,16 @@
 			<to-view-id>/faces/nivel-educativo.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
-	</navigation-rule>
-	<navigation-rule>
-		<display-name>ANY PAGE</display-name>
-		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-action>#{beneficiarioMBean.loadDashboard}</from-action>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/faces/beneficiario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{personaMoralMBean.loadDashboard}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/faces/persona-moral.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -101,6 +103,12 @@
 		<display-name>RfcMoralValidator</display-name>
 		<validator-id>rfcMoralValidator</validator-id>
 		<validator-class>org.mysat.faces.validators.RfcMoralValidator</validator-class>
+	</validator>
+	
+	<validator>
+		<display-name>RazonSocialValidator</display-name>
+		<validator-id>razonSocialValidator</validator-id>
+		<validator-class>org.mysat.faces.validators.RazonSocialValidator</validator-class>
 	</validator>
 
 </faces-config>
